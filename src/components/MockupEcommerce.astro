@@ -1,0 +1,95 @@
+---
+// Mockup E-commerce — CSS pur, pas d'image externe
+---
+<div class="mockup-shop">
+  <div class="mockup-shop-header">
+    <div class="mockup-shop-logo"></div>
+    <div class="mockup-shop-nav">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+  <div class="mockup-shop-products">
+    <div class="mockup-shop-product">
+      <div class="mockup-shop-img"></div>
+      <div class="mockup-shop-line"></div>
+      <div class="mockup-shop-line mockup-shop-line--short"></div>
+      <div class="mockup-shop-price"></div>
+    </div>
+    <div class="mockup-shop-product">
+      <div class="mockup-shop-img"></div>
+      <div class="mockup-shop-line"></div>
+      <div class="mockup-shop-line mockup-shop-line--short"></div>
+      <div class="mockup-shop-price"></div>
+    </div>
+    <div class="mockup-shop-product">
+      <div class="mockup-shop-img"></div>
+      <div class="mockup-shop-line"></div>
+      <div class="mockup-shop-line mockup-shop-line--short"></div>
+      <div class="mockup-shop-price"></div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .mockup-shop {
+    height: 100%;
+    background: linear-gradient(180deg, #1a1a2e 0%, #16213e 100%);
+    padding: var(--space-3);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+  .mockup-shop-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: var(--space-2);
+    border-bottom: 1px solid rgba(255,255,255,.08);
+  }
+  .mockup-shop-logo {
+    width: 48px;
+    height: 8px;
+    background: var(--color-gold);
+    border-radius: 4px;
+  }
+  .mockup-shop-nav { display: flex; gap: var(--space-2); }
+  .mockup-shop-nav span {
+    width: 20px;
+    height: 4px;
+    background: rgba(255,255,255,.2);
+    border-radius: 2px;
+  }
+  .mockup-shop-products {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-2);
+    flex: 1;
+  }
+  .mockup-shop-product {
+    background: rgba(255,255,255,.05);
+    border-radius: 4px;
+    padding: var(--space-2);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+  .mockup-shop-img {
+    width: 100%;
+    aspect-ratio: 1;
+    background: rgba(201,168,76,.15);
+    border-radius: 3px;
+  }
+  .mockup-shop-line {
+    height: 4px;
+    background: rgba(255,255,255,.15);
+    border-radius: 2px;
+  }
+  .mockup-shop-line--short { width: 60%; }
+  .mockup-shop-price {
+    height: 6px;
+    width: 40%;
+    background: var(--color-gold);
+    border-radius: 3px;
+    opacity: .7;
+  }
+</style>

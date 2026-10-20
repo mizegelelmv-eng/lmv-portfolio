@@ -1,0 +1,99 @@
+---
+import { SKILLS } from '../config';
+---
+
+<section id="competences" class="section section-alt" aria-labelledby="skills-title">
+  <div class="container">
+    <p class="reveal section-eyebrow">Compétences</p>
+    <h2 id="skills-title" class="reveal reveal-delay-1 section-title">
+      Technologies &amp; outils
+    </h2>
+    <div class="gold-line reveal reveal-delay-2" aria-hidden="true"></div>
+    <p class="reveal reveal-delay-2 section-subtitle">
+      Un stack moderne et rodé, adapté à chaque besoin.
+    </p>
+
+    <div class="skills-grid">
+      {Object.entries(SKILLS).map(([category, items], i) => (
+        <div class="skill-card reveal reveal-delay-{i + 1}" key={category}>
+          <h3 class="skill-card-title">
+            {category === 'frontend' && 'Frontend'}
+            {category === 'backend' && 'Backend'}
+            {category === 'tools' && 'Outils &amp; méthodologies'}
+          </h3>
+          <ul class="skill-list">
+            {items.map((skill) => (
+              <li class="skill-item" key={skill}>
+                <svg class="skill-check" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                {skill}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .section-eyebrow {
+    font-size: var(--text-xs);
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--color-gold);
+    margin-bottom: var(--space-3);
+  }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+
+  @media (min-width: 768px) {
+    .skills-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  .skill-card {
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-8);
+    transition: border-color var(--transition-base), transform var(--transition-base);
+  }
+
+  .skill-card:hover {
+    border-color: var(--color-gold);
+    transform: translateY(-4px);
+  }
+
+  .skill-card-title {
+    font-family: var(--font-display);
+    font-size: var(--text-xl);
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: var(--space-6);
+    padding-bottom: var(--space-4);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .skill-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .skill-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+  }
+
+  .skill-check {
+    color: var(--color-gold);
+    flex-shrink: 0;
+  }
+</style>

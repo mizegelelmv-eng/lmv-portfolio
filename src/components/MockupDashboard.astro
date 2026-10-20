@@ -1,0 +1,118 @@
+---
+// Mockup Dashboard — CSS pur, pas d'image externe
+---
+<div class="mockup-dash">
+  <div class="mockup-dash-sidebar">
+    <div class="mockup-dash-logo"></div>
+    <div class="mockup-dash-menu-item mockup-dash-menu-item--active"></div>
+    <div class="mockup-dash-menu-item"></div>
+    <div class="mockup-dash-menu-item"></div>
+    <div class="mockup-dash-menu-item"></div>
+  </div>
+  <div class="mockup-dash-main">
+    <div class="mockup-dash-charts">
+      <div class="mockup-dash-chart">
+        <div class="mockup-dash-chart-bar" style="width:80%"></div>
+        <div class="mockup-dash-chart-bar" style="width:60%"></div>
+        <div class="mockup-dash-chart-bar" style="width:90%"></div>
+      </div>
+      <div class="mockup-dash-chart">
+        <div class="mockup-dash-chart-bar" style="width:70%"></div>
+        <div class="mockup-dash-chart-bar" style="width:50%"></div>
+        <div class="mockup-dash-chart-bar" style="width:85%"></div>
+      </div>
+    </div>
+    <div class="mockup-dash-table">
+      <div class="mockup-dash-row">
+        <div class="mockup-dash-cell"></div>
+        <div class="mockup-dash-cell"></div>
+        <div class="mockup-dash-cell"></div>
+      </div>
+      <div class="mockup-dash-row">
+        <div class="mockup-dash-cell"></div>
+        <div class="mockup-dash-cell"></div>
+        <div class="mockup-dash-cell"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .mockup-dash {
+    height: 100%;
+    background: #0f1117;
+    display: flex;
+  }
+  .mockup-dash-sidebar {
+    width: 28%;
+    background: #161b22;
+    padding: var(--space-3);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+  .mockup-dash-logo {
+    width: 50%;
+    height: 6px;
+    background: var(--color-gold);
+    border-radius: 3px;
+    margin-bottom: var(--space-2);
+  }
+  .mockup-dash-menu-item {
+    height: 6px;
+    background: rgba(255,255,255,.08);
+    border-radius: 3px;
+  }
+  .mockup-dash-menu-item--active {
+    background: rgba(201,168,76,.3);
+    width: 70%;
+  }
+  .mockup-dash-main {
+    flex: 1;
+    padding: var(--space-3);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+  .mockup-dash-charts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-2);
+    flex: 1;
+  }
+  .mockup-dash-chart {
+    background: rgba(255,255,255,.03);
+    border: 1px solid rgba(255,255,255,.06);
+    border-radius: 4px;
+    padding: var(--space-2);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+  .mockup-dash-chart-bar {
+    height: 4px;
+    background: rgba(255,255,255,.1);
+    border-radius: 2px;
+  }
+  .mockup-dash-table {
+    height: 32%;
+    background: rgba(255,255,255,.03);
+    border: 1px solid rgba(255,255,255,.06);
+    border-radius: 4px;
+    padding: var(--space-2);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+  .mockup-dash-row {
+    display: flex;
+    gap: var(--space-1);
+    flex: 1;
+  }
+  .mockup-dash-cell {
+    flex: 1;
+    background: rgba(255,255,255,.06);
+    border-radius: 2px;
+    height: 100%;
+  }
+</style>

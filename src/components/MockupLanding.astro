@@ -1,0 +1,96 @@
+---
+// Mockup Landing page — CSS pur, pas d'image externe
+---
+<div class="mockup-landing">
+  <div class="mockup-landing-nav">
+    <div class="mockup-landing-logo"></div>
+    <div class="mockup-landing-btn"></div>
+  </div>
+  <div class="mockup-landing-hero">
+    <div class="mockup-landing-title mockup-landing-title--accent"></div>
+    <div class="mockup-landing-title"></div>
+    <div class="mockup-landing-sub"></div>
+    <div class="mockup-landing-sub" style="width:40%"></div>
+    <div class="mockup-landing-cta"></div>
+  </div>
+  <div class="mockup-landing-features">
+    <div class="mockup-landing-feat"></div>
+    <div class="mockup-landing-feat"></div>
+    <div class="mockup-landing-feat"></div>
+  </div>
+</div>
+
+<style>
+  .mockup-landing {
+    height: 100%;
+    background: linear-gradient(180deg, #0a0a0a 0%, #111 100%);
+    padding: var(--space-3);
+    display: flex;
+    flex-direction: column;
+  }
+  .mockup-landing-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-3);
+  }
+  .mockup-landing-logo {
+    width: 36px;
+    height: 6px;
+    background: var(--color-gold);
+    border-radius: 3px;
+  }
+  .mockup-landing-btn {
+    width: 28px;
+    height: 10px;
+    background: var(--color-gold);
+    border-radius: 5px;
+    opacity: .8;
+  }
+  .mockup-landing-hero {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: var(--space-2);
+  }
+  .mockup-landing-title {
+    width: 70%;
+    height: 8px;
+    background: rgba(255,255,255,.2);
+    border-radius: 4px;
+  }
+  .mockup-landing-title--accent {
+    background: var(--color-gold);
+    opacity: .8;
+    width: 50%;
+    height: 10px;
+  }
+  .mockup-landing-sub {
+    width: 60%;
+    height: 4px;
+    background: rgba(255,255,255,.1);
+    border-radius: 2px;
+  }
+  .mockup-landing-cta {
+    width: 60px;
+    height: 16px;
+    background: var(--color-gold);
+    border-radius: 8px;
+    margin-top: var(--space-1);
+  }
+  .mockup-landing-features {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-2);
+    margin-top: var(--space-3);
+  }
+  .mockup-landing-feat {
+    height: 32px;
+    background: rgba(255,255,255,.04);
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 4px;
+  }
+</style>
