@@ -1,0 +1,738 @@
+<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" type="image/svg+xml" href="/lmv-portfolio/favicon.svg"><meta name="generator" content="Astro v7.4.3"><title>LMV — Développeur Web Freelance</title><meta name="description" content="Développeur web freelance spécialisé dans la création de sites modernes, performants et sur-mesure."><meta name="author" content="LMV Mizegele"><meta name="robots" content="index, follow"><!-- Google Fonts — préconnect pour la performance --><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="/lmv-portfolio/_astro/index.DxwjewIs.css"></head><body><a href="#main-content" class="sr-only">Aller au contenu principal</a><nav class="navbar" aria-label="Navigation principale" data-astro-cid-l7arcky5><div class="container navbar-inner" data-astro-cid-l7arcky5><a href="/lmv-portfolio" class="navbar-brand" aria-label="Retour à l'accueil" data-astro-cid-l7arcky5><span class="navbar-logo" data-astro-cid-l7arcky5>LMV Digital</span></a><button class="navbar-toggle" aria-expanded="false" aria-controls="navbar-menu" aria-label="Ouvrir le menu" data-astro-cid-l7arcky5><span class="navbar-toggle-icon" data-astro-cid-l7arcky5></span><span class="navbar-toggle-icon" data-astro-cid-l7arcky5></span><span class="navbar-toggle-icon" data-astro-cid-l7arcky5></span></button><div id="navbar-menu" class="navbar-menu-container" data-astro-cid-l7arcky5><ul class="navbar-menu" data-astro-cid-l7arcky5><li data-astro-cid-l7arcky5><a href="#apropos" class="navbar-link" data-astro-cid-l7arcky5>À propos</a></li><li data-astro-cid-l7arcky5><a href="#competences" class="navbar-link" data-astro-cid-l7arcky5>Compétences</a></li><li data-astro-cid-l7arcky5><a href="#projets" class="navbar-link" data-astro-cid-l7arcky5>Projets</a></li><li data-astro-cid-l7arcky5><a href="#services" class="navbar-link" data-astro-cid-l7arcky5>Services</a></li><li data-astro-cid-l7arcky5><a href="#processus" class="navbar-link" data-astro-cid-l7arcky5>Processus</a></li><li data-astro-cid-l7arcky5><a href="#contact" class="navbar-link" data-astro-cid-l7arcky5>Contact</a></li></ul></div><a href="#contact" class="btn btn-primary navbar-cta" data-astro-cid-l7arcky5>Me contacter</a></div></nav><script type="module">var e=document.querySelector(`.navbar-toggle`),t=document.querySelectorAll(`.navbar-link`);e?.addEventListener(`click`,()=>{document.body.classList.toggle(`nav-open`);let t=document.body.classList.contains(`nav-open`);e.setAttribute(`aria-expanded`,String(t))}),t.forEach(t=>{t.addEventListener(`click`,()=>{document.body.classList.remove(`nav-open`),e?.setAttribute(`aria-expanded`,`false`)})});</script><main id="main-content"><section class="hero" aria-label="Accueil" data-astro-cid-ge2uvauf><div class="canvas-liquid-container" data-astro-cid-4mpecmiq><div class="canvas-liquid-content" id="liquid-content" data-astro-cid-4mpecmiq><div class="hero-background-fallback" data-astro-cid-ge2uvauf></div></div><canvas class="canvas-liquid-source" id="liquid-source" data-astro-cid-4mpecmiq></canvas><canvas class="canvas-liquid-output" id="liquid-output" aria-hidden="true" data-astro-cid-4mpecmiq></canvas></div><script client:load>(function(){const color = [0.83,0.69,0.22];
+const intensity = 1.2;
+const distortion = 0.3;
+
+  (async () => {
+    if (typeof window === 'undefined') return;
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const outputCanvas = document.getElementById('liquid-output');
+    if (prefersReducedMotion && outputCanvas) {
+      outputCanvas.style.display = 'none';
+      return;
+    }
+
+    try {
+      const { createLiquid } = await import(new URL('lib/Liquid.js', document.baseURI).href);
+      const sourceCanvas = document.getElementById('liquid-source');
+      const content = document.getElementById('liquid-content');
+
+      if (!sourceCanvas || !outputCanvas || !content) return;
+
+      const instance = createLiquid(
+        { source: sourceCanvas, content, output: outputCanvas },
+        {
+          color,
+          intensity,
+          distortion,
+          densityDissipation: 0.92,
+          velocityDissipation: 0.98,
+          curl: 2.5,
+          blend: 8,
+          rainbow: false,
+        }
+      );
+
+      if (!instance) {
+        outputCanvas.style.display = 'none';
+      } else {
+        let tick = 0;
+        const idleInterval = setInterval(() => {
+          tick += 0.02;
+          const x = 0.3 + 0.4 * Math.sin(tick * 0.7);
+          const y = 0.3 + 0.4 * Math.cos(tick * 0.5);
+          instance.splat(x, y, Math.sin(tick) * 0.01, Math.cos(tick) * 0.01);
+        }, 50);
+
+        window.addEventListener('beforeunload', () => {
+          instance.destroy();
+          clearInterval(idleInterval);
+        });
+      }
+    } catch (e) {
+      console.error('[CanvasLiquid] Error:', e);
+      if (outputCanvas) outputCanvas.style.display = 'none';
+    }
+  })();
+})();</script><div class="container hero-content" data-astro-cid-ge2uvauf><span class="section-eyebrow reveal" data-astro-cid-ge2uvauf>LMV Digital</span><h1 class="hero-title reveal reveal-delay-1" data-astro-cid-ge2uvauf>Développeur Web <span class="text-gold" data-astro-cid-ge2uvauf>Freelance</span></h1><p class="hero-description reveal reveal-delay-2" data-astro-cid-ge2uvauf>Je conçois des expériences numériques <span class="text-white" data-astro-cid-ge2uvauf>modernes</span>, performantes et <span class="text-white" data-astro-cid-ge2uvauf>sur-mesure</span> pour propulser votre activité.</p><div class="hero-actions reveal reveal-delay-3" data-astro-cid-ge2uvauf><a href="#projets" class="btn btn-primary" data-astro-cid-ge2uvauf>Voir mes projets</a><a href="#contact" class="btn btn-outline" data-astro-cid-ge2uvauf>Me contacter</a></div></div></section><div class="particle-reveal-section" data-particle-reveal data-astro-cid-e2mzjgef><div class="particle-reveal-content" data-astro-cid-e2mzjgef><section id="apropos" class="section" aria-labelledby="about-title" data-astro-cid-oxgmilyn><div class="container" data-astro-cid-oxgmilyn><div class="about-grid" data-astro-cid-oxgmilyn><div class="about-content" data-astro-cid-oxgmilyn><span class="section-eyebrow" data-astro-cid-oxgmilyn>À propos</span><h2 id="about-title" class="section-title" data-astro-cid-oxgmilyn>Développeur Freelance Passionné</h2><div class="gold-line" data-astro-cid-oxgmilyn></div><p class="about-text" data-astro-cid-oxgmilyn>Développeur web freelance passionné par la création d&#39;expériences numériques modernes, performantes et accessibles.</p><p class="about-text" data-astro-cid-oxgmilyn>Je suis basé à Kinshasa, Congo. Ma philosophie : allier esthétique soignée et haute performance technique.</p></div><div class="about-visual" data-astro-cid-oxgmilyn><div class="profile-card" data-astro-cid-oxgmilyn><div class="profile-placeholder" data-astro-cid-oxgmilyn>LMV</div></div></div></div></div></section></div><canvas class="particle-reveal-canvas" aria-hidden="true" data-astro-cid-e2mzjgef></canvas></div><script client:load>(function(){const radius = 300;
+const smoothing = 0.2;
+const particleSize = 1;
+
+  (async () => {
+    if (typeof window === 'undefined') return;
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) return;
+
+    await new Promise(r => requestAnimationFrame(r));
+
+    const sections = document.querySelectorAll('[data-particle-reveal]');
+    try {
+      const { createParticleReveal } = await import(new URL('lib/ParticleReveal.js', document.baseURI).href);
+
+      sections.forEach((sectionEl) => {
+        const content = sectionEl.querySelector('.particle-reveal-content');
+        const canvas = sectionEl.querySelector('.particle-reveal-canvas');
+
+        if (!content || !canvas) return;
+
+        const instance = createParticleReveal(
+          { source: canvas, content, output: canvas },
+          {
+            radius,
+            softness: 0.6,
+            size: particleSize,
+            scatter: 12,
+            drift: 0.2,
+            aberration: 6,
+            bend: 15,
+            fade: 0.85,
+            threshold: 0.08,
+            background: '#08090B',
+            smoothing,
+          }
+        );
+
+        if (instance) {
+          window.addEventListener('beforeunload', () => instance.destroy());
+        }
+      });
+    } catch (e) {
+      console.error('[SectionParticleReveal] Error:', e);
+    }
+  })();
+})();</script><div class="particle-reveal-section" data-particle-reveal data-astro-cid-e2mzjgef><div class="particle-reveal-content" data-astro-cid-e2mzjgef><section id="competences" class="section section-alt" aria-labelledby="skills-title" data-astro-cid-2zwc476k><div class="container" data-astro-cid-2zwc476k><span class="section-eyebrow" data-astro-cid-2zwc476k>Compétences</span><h2 id="skills-title" class="section-title" data-astro-cid-2zwc476k>Technologies & Outils</h2><div class="gold-line" data-astro-cid-2zwc476k></div><p class="section-subtitle" data-astro-cid-2zwc476k>Un écosystème technique maîtrisé pour des solutions performantes.</p><div class="grid grid-3" data-astro-cid-2zwc476k><div class="glass-card" data-astro-cid-2zwc476k><h3 class="skill-category" data-astro-cid-2zwc476k>Frontend</h3><ul class="skill-list" data-astro-cid-2zwc476k><li data-astro-cid-2zwc476k>HTML5 / CSS3</li><li data-astro-cid-2zwc476k>JavaScript / TypeScript</li><li data-astro-cid-2zwc476k>Astro</li><li data-astro-cid-2zwc476k>React</li><li data-astro-cid-2zwc476k>Tailwind CSS</li><li data-astro-cid-2zwc476k>Animation CSS / GSAP</li></ul></div><div class="glass-card" data-astro-cid-2zwc476k><h3 class="skill-category" data-astro-cid-2zwc476k>Backend</h3><ul class="skill-list" data-astro-cid-2zwc476k><li data-astro-cid-2zwc476k>Node.js</li><li data-astro-cid-2zwc476k>Python</li><li data-astro-cid-2zwc476k>API REST</li><li data-astro-cid-2zwc476k>CMS headless (Strapi, Sanity)</li></ul></div><div class="glass-card" data-astro-cid-2zwc476k><h3 class="skill-category" data-astro-cid-2zwc476k>Outils</h3><ul class="skill-list" data-astro-cid-2zwc476k><li data-astro-cid-2zwc476k>Git / GitHub</li><li data-astro-cid-2zwc476k>npm / pnpm / bun</li><li data-astro-cid-2zwc476k>Vercel / Netlify / GitHub Pages</li><li data-astro-cid-2zwc476k>Figma / Adobe XD</li><li data-astro-cid-2zwc476k>SEO technique</li><li data-astro-cid-2zwc476k>Performance web (Lighthouse)</li></ul></div></div></div></section></div><canvas class="particle-reveal-canvas" aria-hidden="true" data-astro-cid-e2mzjgef></canvas></div><script client:load>(function(){const radius = 300;
+const smoothing = 0.2;
+const particleSize = 1;
+
+  (async () => {
+    if (typeof window === 'undefined') return;
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) return;
+
+    await new Promise(r => requestAnimationFrame(r));
+
+    const sections = document.querySelectorAll('[data-particle-reveal]');
+    try {
+      const { createParticleReveal } = await import(new URL('lib/ParticleReveal.js', document.baseURI).href);
+
+      sections.forEach((sectionEl) => {
+        const content = sectionEl.querySelector('.particle-reveal-content');
+        const canvas = sectionEl.querySelector('.particle-reveal-canvas');
+
+        if (!content || !canvas) return;
+
+        const instance = createParticleReveal(
+          { source: canvas, content, output: canvas },
+          {
+            radius,
+            softness: 0.6,
+            size: particleSize,
+            scatter: 12,
+            drift: 0.2,
+            aberration: 6,
+            bend: 15,
+            fade: 0.85,
+            threshold: 0.08,
+            background: '#08090B',
+            smoothing,
+          }
+        );
+
+        if (instance) {
+          window.addEventListener('beforeunload', () => instance.destroy());
+        }
+      });
+    } catch (e) {
+      console.error('[SectionParticleReveal] Error:', e);
+    }
+  })();
+})();</script><div class="particle-reveal-section" data-particle-reveal data-astro-cid-e2mzjgef><div class="particle-reveal-content" data-astro-cid-e2mzjgef><section id="projets" class="section" aria-labelledby="projects-title" data-astro-cid-ftq3vvlr><div class="container" data-astro-cid-ftq3vvlr><span class="section-eyebrow" data-astro-cid-ftq3vvlr>Portfolio</span><h2 id="projects-title" class="section-title" data-astro-cid-ftq3vvlr>Projets de Démonstration</h2><div class="gold-line" data-astro-cid-ftq3vvlr></div><p class="section-subtitle" data-astro-cid-ftq3vvlr>Exploration technique et design sur des thématiques variées.</p><div class="grid grid-3" data-astro-cid-ftq3vvlr><div class="glass-card-wrapper" data-glass-wrapper data-astro-cid-pgajmkse><div class="glass-card" data-astro-cid-pgajmkse><article class="project-item" data-glass-target data-astro-cid-ftq3vvlr><div class="project-badge" data-astro-cid-ftq3vvlr>Démonstration</div><div class="project-mockup" data-astro-cid-ftq3vvlr><div class="mockup-shop" data-astro-cid-ltsjxcgb><div class="mockup-shop-header" data-astro-cid-ltsjxcgb><div class="mockup-shop-logo" data-astro-cid-ltsjxcgb></div><div class="mockup-shop-nav" data-astro-cid-ltsjxcgb><span data-astro-cid-ltsjxcgb></span><span data-astro-cid-ltsjxcgb></span><span data-astro-cid-ltsjxcgb></span></div></div><div class="mockup-shop-products" data-astro-cid-ltsjxcgb><div class="mockup-shop-product" data-astro-cid-ltsjxcgb><div class="mockup-shop-img" data-astro-cid-ltsjxcgb></div><div class="mockup-shop-line" data-astro-cid-ltsjxcgb></div><div class="mockup-shop-line mockup-shop-line--short" data-astro-cid-ltsjxcgb></div><div class="mockup-shop-price" data-astro-cid-ltsjxcgb></div></div><div class="mockup-shop-product" data-astro-cid-ltsjxcgb><div class="mockup-shop-img" data-astro-cid-ltsjxcgb></div><div class="mockup-shop-line" data-astro-cid-ltsjxcgb></div><div class="mockup-shop-line mockup-shop-line--short" data-astro-cid-ltsjxcgb></div><div class="mockup-shop-price" data-astro-cid-ltsjxcgb></div></div><div class="mockup-shop-product" data-astro-cid-ltsjxcgb><div class="mockup-shop-img" data-astro-cid-ltsjxcgb></div><div class="mockup-shop-line" data-astro-cid-ltsjxcgb></div><div class="mockup-shop-line mockup-shop-line--short" data-astro-cid-ltsjxcgb></div><div class="mockup-shop-price" data-astro-cid-ltsjxcgb></div></div></div></div></div><h3 class="project-item-title" data-astro-cid-ftq3vvlr>ShopFlow</h3><p class="project-item-tagline" data-astro-cid-ftq3vvlr>Site e-commerce responsive</p><div class="project-tags" data-astro-cid-ftq3vvlr><span data-astro-cid-ftq3vvlr>Astro</span><span data-astro-cid-ftq3vvlr>CSS</span><span data-astro-cid-ftq3vvlr>JavaScript</span></div></article></div></div><script client:load>(function(){const targetSelector = "[data-glass-target]";
+const size = 100;
+const ior = 1.45;
+
+  (async () => {
+    if (typeof window === 'undefined') return;
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) return;
+
+    // Utilisation d'un délai pour s'assurer que le DOM est stable
+    await new Promise(r => setTimeout(r, 100));
+
+    const wrappers = document.querySelectorAll('[data-glass-wrapper]');
+    // On ne traite que le dernier ajouté pour éviter les duplicatas dans la boucle Astro
+    const wrapper = Array.from(wrappers).pop();
+
+    if (!wrapper) return;
+
+    const content = wrapper.querySelector(targetSelector);
+    if (!content) return;
+
+    try {
+      const { createGlass } = await import(new URL('lib/Glass.js', document.baseURI).href);
+
+      const sourceCanvas = document.createElement('canvas');
+      sourceCanvas.className = 'glass-canvas-source';
+      document.body.appendChild(sourceCanvas);
+
+      const outputCanvas = document.createElement('canvas');
+      outputCanvas.className = 'glass-canvas-output';
+      document.body.appendChild(outputCanvas);
+
+      const instance = createGlass(
+        { source: sourceCanvas, content, output: outputCanvas },
+        {
+          shape: 'circle',
+          size,
+          ior,
+          edge: 0.6,
+          bevel: 3,
+          depth: 180,
+          aberration: 0.6,
+          blur: 0.3,
+          reflection: 0.8,
+          shine: 0.05,
+          zoom: 1.4,
+          targets: targetSelector,
+          follow: 0.35,
+        }
+      );
+
+      window.addEventListener('beforeunload', () => instance?.destroy());
+    } catch (e) {
+      console.error('[GlassCard] Error:', e);
+    }
+  })();
+})();</script><div class="glass-card-wrapper" data-glass-wrapper data-astro-cid-pgajmkse><div class="glass-card" data-astro-cid-pgajmkse><article class="project-item" data-glass-target data-astro-cid-ftq3vvlr><div class="project-badge" data-astro-cid-ftq3vvlr>Démonstration</div><div class="project-mockup" data-astro-cid-ftq3vvlr><div class="mockup-dash" data-astro-cid-glmgodrd><div class="mockup-dash-sidebar" data-astro-cid-glmgodrd><div class="mockup-dash-logo" data-astro-cid-glmgodrd></div><div class="mockup-dash-menu-item mockup-dash-menu-item--active" data-astro-cid-glmgodrd></div><div class="mockup-dash-menu-item" data-astro-cid-glmgodrd></div><div class="mockup-dash-menu-item" data-astro-cid-glmgodrd></div><div class="mockup-dash-menu-item" data-astro-cid-glmgodrd></div></div><div class="mockup-dash-main" data-astro-cid-glmgodrd><div class="mockup-dash-charts" data-astro-cid-glmgodrd><div class="mockup-dash-chart" data-astro-cid-glmgodrd><div class="mockup-dash-chart-bar" style="width:80%" data-astro-cid-glmgodrd></div><div class="mockup-dash-chart-bar" style="width:60%" data-astro-cid-glmgodrd></div><div class="mockup-dash-chart-bar" style="width:90%" data-astro-cid-glmgodrd></div></div><div class="mockup-dash-chart" data-astro-cid-glmgodrd><div class="mockup-dash-chart-bar" style="width:70%" data-astro-cid-glmgodrd></div><div class="mockup-dash-chart-bar" style="width:50%" data-astro-cid-glmgodrd></div><div class="mockup-dash-chart-bar" style="width:85%" data-astro-cid-glmgodrd></div></div></div><div class="mockup-dash-table" data-astro-cid-glmgodrd><div class="mockup-dash-row" data-astro-cid-glmgodrd><div class="mockup-dash-cell" data-astro-cid-glmgodrd></div><div class="mockup-dash-cell" data-astro-cid-glmgodrd></div><div class="mockup-dash-cell" data-astro-cid-glmgodrd></div></div><div class="mockup-dash-row" data-astro-cid-glmgodrd><div class="mockup-dash-cell" data-astro-cid-glmgodrd></div><div class="mockup-dash-cell" data-astro-cid-glmgodrd></div><div class="mockup-dash-cell" data-astro-cid-glmgodrd></div></div></div></div></div></div><h3 class="project-item-title" data-astro-cid-ftq3vvlr>DashCore</h3><p class="project-item-tagline" data-astro-cid-ftq3vvlr>Dashboard administrateur SaaS</p><div class="project-tags" data-astro-cid-ftq3vvlr><span data-astro-cid-ftq3vvlr>HTML/CSS</span><span data-astro-cid-ftq3vvlr>JavaScript</span><span data-astro-cid-ftq3vvlr>Chart.js</span></div></article></div></div><script client:load>(function(){const targetSelector = "[data-glass-target]";
+const size = 100;
+const ior = 1.45;
+
+  (async () => {
+    if (typeof window === 'undefined') return;
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) return;
+
+    // Utilisation d'un délai pour s'assurer que le DOM est stable
+    await new Promise(r => setTimeout(r, 100));
+
+    const wrappers = document.querySelectorAll('[data-glass-wrapper]');
+    // On ne traite que le dernier ajouté pour éviter les duplicatas dans la boucle Astro
+    const wrapper = Array.from(wrappers).pop();
+
+    if (!wrapper) return;
+
+    const content = wrapper.querySelector(targetSelector);
+    if (!content) return;
+
+    try {
+      const { createGlass } = await import(new URL('lib/Glass.js', document.baseURI).href);
+
+      const sourceCanvas = document.createElement('canvas');
+      sourceCanvas.className = 'glass-canvas-source';
+      document.body.appendChild(sourceCanvas);
+
+      const outputCanvas = document.createElement('canvas');
+      outputCanvas.className = 'glass-canvas-output';
+      document.body.appendChild(outputCanvas);
+
+      const instance = createGlass(
+        { source: sourceCanvas, content, output: outputCanvas },
+        {
+          shape: 'circle',
+          size,
+          ior,
+          edge: 0.6,
+          bevel: 3,
+          depth: 180,
+          aberration: 0.6,
+          blur: 0.3,
+          reflection: 0.8,
+          shine: 0.05,
+          zoom: 1.4,
+          targets: targetSelector,
+          follow: 0.35,
+        }
+      );
+
+      window.addEventListener('beforeunload', () => instance?.destroy());
+    } catch (e) {
+      console.error('[GlassCard] Error:', e);
+    }
+  })();
+})();</script><div class="glass-card-wrapper" data-glass-wrapper data-astro-cid-pgajmkse><div class="glass-card" data-astro-cid-pgajmkse><article class="project-item" data-glass-target data-astro-cid-ftq3vvlr><div class="project-badge" data-astro-cid-ftq3vvlr>Démonstration</div><div class="project-mockup" data-astro-cid-ftq3vvlr><div class="mockup-landing" data-astro-cid-7cbwbom6><div class="mockup-landing-nav" data-astro-cid-7cbwbom6><div class="mockup-landing-logo" data-astro-cid-7cbwbom6></div><div class="mockup-landing-btn" data-astro-cid-7cbwbom6></div></div><div class="mockup-landing-hero" data-astro-cid-7cbwbom6><div class="mockup-landing-title mockup-landing-title--accent" data-astro-cid-7cbwbom6></div><div class="mockup-landing-title" data-astro-cid-7cbwbom6></div><div class="mockup-landing-sub" data-astro-cid-7cbwbom6></div><div class="mockup-landing-sub" style="width:40%" data-astro-cid-7cbwbom6></div><div class="mockup-landing-cta" data-astro-cid-7cbwbom6></div></div><div class="mockup-landing-features" data-astro-cid-7cbwbom6><div class="mockup-landing-feat" data-astro-cid-7cbwbom6></div><div class="mockup-landing-feat" data-astro-cid-7cbwbom6></div><div class="mockup-landing-feat" data-astro-cid-7cbwbom6></div></div></div></div><h3 class="project-item-title" data-astro-cid-ftq3vvlr>Lumina</h3><p class="project-item-tagline" data-astro-cid-ftq3vvlr>Landing page startup</p><div class="project-tags" data-astro-cid-ftq3vvlr><span data-astro-cid-ftq3vvlr>Astro</span><span data-astro-cid-ftq3vvlr>CSS</span><span data-astro-cid-ftq3vvlr>Animation</span></div></article></div></div><script client:load>(function(){const targetSelector = "[data-glass-target]";
+const size = 100;
+const ior = 1.45;
+
+  (async () => {
+    if (typeof window === 'undefined') return;
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) return;
+
+    // Utilisation d'un délai pour s'assurer que le DOM est stable
+    await new Promise(r => setTimeout(r, 100));
+
+    const wrappers = document.querySelectorAll('[data-glass-wrapper]');
+    // On ne traite que le dernier ajouté pour éviter les duplicatas dans la boucle Astro
+    const wrapper = Array.from(wrappers).pop();
+
+    if (!wrapper) return;
+
+    const content = wrapper.querySelector(targetSelector);
+    if (!content) return;
+
+    try {
+      const { createGlass } = await import(new URL('lib/Glass.js', document.baseURI).href);
+
+      const sourceCanvas = document.createElement('canvas');
+      sourceCanvas.className = 'glass-canvas-source';
+      document.body.appendChild(sourceCanvas);
+
+      const outputCanvas = document.createElement('canvas');
+      outputCanvas.className = 'glass-canvas-output';
+      document.body.appendChild(outputCanvas);
+
+      const instance = createGlass(
+        { source: sourceCanvas, content, output: outputCanvas },
+        {
+          shape: 'circle',
+          size,
+          ior,
+          edge: 0.6,
+          bevel: 3,
+          depth: 180,
+          aberration: 0.6,
+          blur: 0.3,
+          reflection: 0.8,
+          shine: 0.05,
+          zoom: 1.4,
+          targets: targetSelector,
+          follow: 0.35,
+        }
+      );
+
+      window.addEventListener('beforeunload', () => instance?.destroy());
+    } catch (e) {
+      console.error('[GlassCard] Error:', e);
+    }
+  })();
+})();</script></div></div></section></div><canvas class="particle-reveal-canvas" aria-hidden="true" data-astro-cid-e2mzjgef></canvas></div><script client:load>(function(){const radius = 350;
+const smoothing = 0.2;
+const particleSize = 1;
+
+  (async () => {
+    if (typeof window === 'undefined') return;
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) return;
+
+    await new Promise(r => requestAnimationFrame(r));
+
+    const sections = document.querySelectorAll('[data-particle-reveal]');
+    try {
+      const { createParticleReveal } = await import(new URL('lib/ParticleReveal.js', document.baseURI).href);
+
+      sections.forEach((sectionEl) => {
+        const content = sectionEl.querySelector('.particle-reveal-content');
+        const canvas = sectionEl.querySelector('.particle-reveal-canvas');
+
+        if (!content || !canvas) return;
+
+        const instance = createParticleReveal(
+          { source: canvas, content, output: canvas },
+          {
+            radius,
+            softness: 0.6,
+            size: particleSize,
+            scatter: 12,
+            drift: 0.2,
+            aberration: 6,
+            bend: 15,
+            fade: 0.85,
+            threshold: 0.08,
+            background: '#08090B',
+            smoothing,
+          }
+        );
+
+        if (instance) {
+          window.addEventListener('beforeunload', () => instance.destroy());
+        }
+      });
+    } catch (e) {
+      console.error('[SectionParticleReveal] Error:', e);
+    }
+  })();
+})();</script><div class="particle-reveal-section" data-particle-reveal data-astro-cid-e2mzjgef><div class="particle-reveal-content" data-astro-cid-e2mzjgef><section id="services" class="section section-alt" aria-labelledby="services-title" data-astro-cid-lesv7jgp><div class="container" data-astro-cid-lesv7jgp><span class="section-eyebrow" data-astro-cid-lesv7jgp>Services</span><h2 id="services-title" class="section-title" data-astro-cid-lesv7jgp>Ce que je propose</h2><div class="gold-line" data-astro-cid-lesv7jgp></div><p class="section-subtitle" data-astro-cid-lesv7jgp>Des prestations sur-mesure pour donner vie à vos projets numériques.</p><div class="grid grid-2" data-astro-cid-lesv7jgp><div class="glass-card-wrapper" data-glass-wrapper data-astro-cid-pgajmkse><div class="glass-card" data-astro-cid-pgajmkse><div data-glass-target class="service-item" data-astro-cid-lesv7jgp><h3 class="service-title" data-astro-cid-lesv7jgp>Site vitrine</h3><p class="service-description" data-astro-cid-lesv7jgp>Site professionnel présentant votre activité, vos services et votre expertise. Optimisé pour le référencement et la conversion.</p></div></div></div><script client:load>(function(){const targetSelector = "[data-glass-target]";
+const size = 100;
+const ior = 1.45;
+
+  (async () => {
+    if (typeof window === 'undefined') return;
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) return;
+
+    // Utilisation d'un délai pour s'assurer que le DOM est stable
+    await new Promise(r => setTimeout(r, 100));
+
+    const wrappers = document.querySelectorAll('[data-glass-wrapper]');
+    // On ne traite que le dernier ajouté pour éviter les duplicatas dans la boucle Astro
+    const wrapper = Array.from(wrappers).pop();
+
+    if (!wrapper) return;
+
+    const content = wrapper.querySelector(targetSelector);
+    if (!content) return;
+
+    try {
+      const { createGlass } = await import(new URL('lib/Glass.js', document.baseURI).href);
+
+      const sourceCanvas = document.createElement('canvas');
+      sourceCanvas.className = 'glass-canvas-source';
+      document.body.appendChild(sourceCanvas);
+
+      const outputCanvas = document.createElement('canvas');
+      outputCanvas.className = 'glass-canvas-output';
+      document.body.appendChild(outputCanvas);
+
+      const instance = createGlass(
+        { source: sourceCanvas, content, output: outputCanvas },
+        {
+          shape: 'circle',
+          size,
+          ior,
+          edge: 0.6,
+          bevel: 3,
+          depth: 180,
+          aberration: 0.6,
+          blur: 0.3,
+          reflection: 0.8,
+          shine: 0.05,
+          zoom: 1.4,
+          targets: targetSelector,
+          follow: 0.35,
+        }
+      );
+
+      window.addEventListener('beforeunload', () => instance?.destroy());
+    } catch (e) {
+      console.error('[GlassCard] Error:', e);
+    }
+  })();
+})();</script><div class="glass-card-wrapper" data-glass-wrapper data-astro-cid-pgajmkse><div class="glass-card" data-astro-cid-pgajmkse><div data-glass-target class="service-item" data-astro-cid-lesv7jgp><h3 class="service-title" data-astro-cid-lesv7jgp>Application web</h3><p class="service-description" data-astro-cid-lesv7jgp>Application web interactive et performante : dashboard, SaaS, outil interne ou plateforme client.</p></div></div></div><script client:load>(function(){const targetSelector = "[data-glass-target]";
+const size = 100;
+const ior = 1.45;
+
+  (async () => {
+    if (typeof window === 'undefined') return;
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) return;
+
+    // Utilisation d'un délai pour s'assurer que le DOM est stable
+    await new Promise(r => setTimeout(r, 100));
+
+    const wrappers = document.querySelectorAll('[data-glass-wrapper]');
+    // On ne traite que le dernier ajouté pour éviter les duplicatas dans la boucle Astro
+    const wrapper = Array.from(wrappers).pop();
+
+    if (!wrapper) return;
+
+    const content = wrapper.querySelector(targetSelector);
+    if (!content) return;
+
+    try {
+      const { createGlass } = await import(new URL('lib/Glass.js', document.baseURI).href);
+
+      const sourceCanvas = document.createElement('canvas');
+      sourceCanvas.className = 'glass-canvas-source';
+      document.body.appendChild(sourceCanvas);
+
+      const outputCanvas = document.createElement('canvas');
+      outputCanvas.className = 'glass-canvas-output';
+      document.body.appendChild(outputCanvas);
+
+      const instance = createGlass(
+        { source: sourceCanvas, content, output: outputCanvas },
+        {
+          shape: 'circle',
+          size,
+          ior,
+          edge: 0.6,
+          bevel: 3,
+          depth: 180,
+          aberration: 0.6,
+          blur: 0.3,
+          reflection: 0.8,
+          shine: 0.05,
+          zoom: 1.4,
+          targets: targetSelector,
+          follow: 0.35,
+        }
+      );
+
+      window.addEventListener('beforeunload', () => instance?.destroy());
+    } catch (e) {
+      console.error('[GlassCard] Error:', e);
+    }
+  })();
+})();</script><div class="glass-card-wrapper" data-glass-wrapper data-astro-cid-pgajmkse><div class="glass-card" data-astro-cid-pgajmkse><div data-glass-target class="service-item" data-astro-cid-lesv7jgp><h3 class="service-title" data-astro-cid-lesv7jgp>Refonte UI/UX</h3><p class="service-description" data-astro-cid-lesv7jgp>Modernisation de l&#39;interface existante pour améliorer l&#39;expérience utilisateur, la lisibilité et les taux de conversion.</p></div></div></div><script client:load>(function(){const targetSelector = "[data-glass-target]";
+const size = 100;
+const ior = 1.45;
+
+  (async () => {
+    if (typeof window === 'undefined') return;
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) return;
+
+    // Utilisation d'un délai pour s'assurer que le DOM est stable
+    await new Promise(r => setTimeout(r, 100));
+
+    const wrappers = document.querySelectorAll('[data-glass-wrapper]');
+    // On ne traite que le dernier ajouté pour éviter les duplicatas dans la boucle Astro
+    const wrapper = Array.from(wrappers).pop();
+
+    if (!wrapper) return;
+
+    const content = wrapper.querySelector(targetSelector);
+    if (!content) return;
+
+    try {
+      const { createGlass } = await import(new URL('lib/Glass.js', document.baseURI).href);
+
+      const sourceCanvas = document.createElement('canvas');
+      sourceCanvas.className = 'glass-canvas-source';
+      document.body.appendChild(sourceCanvas);
+
+      const outputCanvas = document.createElement('canvas');
+      outputCanvas.className = 'glass-canvas-output';
+      document.body.appendChild(outputCanvas);
+
+      const instance = createGlass(
+        { source: sourceCanvas, content, output: outputCanvas },
+        {
+          shape: 'circle',
+          size,
+          ior,
+          edge: 0.6,
+          bevel: 3,
+          depth: 180,
+          aberration: 0.6,
+          blur: 0.3,
+          reflection: 0.8,
+          shine: 0.05,
+          zoom: 1.4,
+          targets: targetSelector,
+          follow: 0.35,
+        }
+      );
+
+      window.addEventListener('beforeunload', () => instance?.destroy());
+    } catch (e) {
+      console.error('[GlassCard] Error:', e);
+    }
+  })();
+})();</script><div class="glass-card-wrapper" data-glass-wrapper data-astro-cid-pgajmkse><div class="glass-card" data-astro-cid-pgajmkse><div data-glass-target class="service-item" data-astro-cid-lesv7jgp><h3 class="service-title" data-astro-cid-lesv7jgp>Optimisation performance</h3><p class="service-description" data-astro-cid-lesv7jgp>Audit et amélioration des perfs (Core Web Vitals, accessibilité, temps de chargement) pour un site rapide et bien classé.</p></div></div></div><script client:load>(function(){const targetSelector = "[data-glass-target]";
+const size = 100;
+const ior = 1.45;
+
+  (async () => {
+    if (typeof window === 'undefined') return;
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) return;
+
+    // Utilisation d'un délai pour s'assurer que le DOM est stable
+    await new Promise(r => setTimeout(r, 100));
+
+    const wrappers = document.querySelectorAll('[data-glass-wrapper]');
+    // On ne traite que le dernier ajouté pour éviter les duplicatas dans la boucle Astro
+    const wrapper = Array.from(wrappers).pop();
+
+    if (!wrapper) return;
+
+    const content = wrapper.querySelector(targetSelector);
+    if (!content) return;
+
+    try {
+      const { createGlass } = await import(new URL('lib/Glass.js', document.baseURI).href);
+
+      const sourceCanvas = document.createElement('canvas');
+      sourceCanvas.className = 'glass-canvas-source';
+      document.body.appendChild(sourceCanvas);
+
+      const outputCanvas = document.createElement('canvas');
+      outputCanvas.className = 'glass-canvas-output';
+      document.body.appendChild(outputCanvas);
+
+      const instance = createGlass(
+        { source: sourceCanvas, content, output: outputCanvas },
+        {
+          shape: 'circle',
+          size,
+          ior,
+          edge: 0.6,
+          bevel: 3,
+          depth: 180,
+          aberration: 0.6,
+          blur: 0.3,
+          reflection: 0.8,
+          shine: 0.05,
+          zoom: 1.4,
+          targets: targetSelector,
+          follow: 0.35,
+        }
+      );
+
+      window.addEventListener('beforeunload', () => instance?.destroy());
+    } catch (e) {
+      console.error('[GlassCard] Error:', e);
+    }
+  })();
+})();</script></div></div></section></div><canvas class="particle-reveal-canvas" aria-hidden="true" data-astro-cid-e2mzjgef></canvas></div><script client:load>(function(){const radius = 300;
+const smoothing = 0.2;
+const particleSize = 1;
+
+  (async () => {
+    if (typeof window === 'undefined') return;
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) return;
+
+    await new Promise(r => requestAnimationFrame(r));
+
+    const sections = document.querySelectorAll('[data-particle-reveal]');
+    try {
+      const { createParticleReveal } = await import(new URL('lib/ParticleReveal.js', document.baseURI).href);
+
+      sections.forEach((sectionEl) => {
+        const content = sectionEl.querySelector('.particle-reveal-content');
+        const canvas = sectionEl.querySelector('.particle-reveal-canvas');
+
+        if (!content || !canvas) return;
+
+        const instance = createParticleReveal(
+          { source: canvas, content, output: canvas },
+          {
+            radius,
+            softness: 0.6,
+            size: particleSize,
+            scatter: 12,
+            drift: 0.2,
+            aberration: 6,
+            bend: 15,
+            fade: 0.85,
+            threshold: 0.08,
+            background: '#08090B',
+            smoothing,
+          }
+        );
+
+        if (instance) {
+          window.addEventListener('beforeunload', () => instance.destroy());
+        }
+      });
+    } catch (e) {
+      console.error('[SectionParticleReveal] Error:', e);
+    }
+  })();
+})();</script><div class="particle-reveal-section" data-particle-reveal data-astro-cid-e2mzjgef><div class="particle-reveal-content" data-astro-cid-e2mzjgef><section id="processus" class="section" aria-labelledby="process-title" data-astro-cid-grsovck6><div class="container" data-astro-cid-grsovck6><span class="section-eyebrow" data-astro-cid-grsovck6>Processus</span><h2 id="process-title" class="section-title" data-astro-cid-grsovck6>Comment je travaille</h2><div class="gold-line" data-astro-cid-grsovck6></div><p class="section-subtitle" data-astro-cid-grsovck6>Une méthodologie rigoureuse pour garantir la qualité et le respect des délais.</p><div class="grid grid-4" data-astro-cid-grsovck6><div class="glass-card process-card" data-astro-cid-grsovck6><span class="process-number" data-astro-cid-grsovck6>01</span><h3 class="process-step-title" data-astro-cid-grsovck6>Échange &amp; compréhension</h3><p class="process-step-desc" data-astro-cid-grsovck6>Nous définissons ensemble vos objectifs, votre audience et le périmètre du projet lors d&#39;un premier appel.</p></div><div class="glass-card process-card" data-astro-cid-grsovck6><span class="process-number" data-astro-cid-grsovck6>02</span><h3 class="process-step-title" data-astro-cid-grsovck6>Conception &amp; maquettes</h3><p class="process-step-desc" data-astro-cid-grsovck6>Je propose une architecture informationnelle et des maquettes validées avant toute rédaction de code.</p></div><div class="glass-card process-card" data-astro-cid-grsovck6><span class="process-number" data-astro-cid-grsovck6>03</span><h3 class="process-step-title" data-astro-cid-grsovck6>Développement</h3><p class="process-step-desc" data-astro-cid-grsovck6>Intégration fidèle aux maquettes, code propre et performant, avec points réguliers vous tenant informé de l&#39;avancement.</p></div><div class="glass-card process-card" data-astro-cid-grsovck6><span class="process-number" data-astro-cid-grsovck6>04</span><h3 class="process-step-title" data-astro-cid-grsovck6>Mise en ligne &amp; suivi</h3><p class="process-step-desc" data-astro-cid-grsovck6>Déploiement sur votre hébergement, tests finaux et correction des ajustements. Support post-livraison inclus.</p></div></div></div></section></div><canvas class="particle-reveal-canvas" aria-hidden="true" data-astro-cid-e2mzjgef></canvas></div><script client:load>(function(){const radius = 300;
+const smoothing = 0.2;
+const particleSize = 1;
+
+  (async () => {
+    if (typeof window === 'undefined') return;
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) return;
+
+    await new Promise(r => requestAnimationFrame(r));
+
+    const sections = document.querySelectorAll('[data-particle-reveal]');
+    try {
+      const { createParticleReveal } = await import(new URL('lib/ParticleReveal.js', document.baseURI).href);
+
+      sections.forEach((sectionEl) => {
+        const content = sectionEl.querySelector('.particle-reveal-content');
+        const canvas = sectionEl.querySelector('.particle-reveal-canvas');
+
+        if (!content || !canvas) return;
+
+        const instance = createParticleReveal(
+          { source: canvas, content, output: canvas },
+          {
+            radius,
+            softness: 0.6,
+            size: particleSize,
+            scatter: 12,
+            drift: 0.2,
+            aberration: 6,
+            bend: 15,
+            fade: 0.85,
+            threshold: 0.08,
+            background: '#08090B',
+            smoothing,
+          }
+        );
+
+        if (instance) {
+          window.addEventListener('beforeunload', () => instance.destroy());
+        }
+      });
+    } catch (e) {
+      console.error('[SectionParticleReveal] Error:', e);
+    }
+  })();
+})();</script><div class="particle-reveal-section" data-particle-reveal data-astro-cid-e2mzjgef><div class="particle-reveal-content" data-astro-cid-e2mzjgef><section id="contact" class="section section-alt" aria-labelledby="contact-title" data-astro-cid-he3spzz3><div class="container" data-astro-cid-he3spzz3><span class="section-eyebrow" data-astro-cid-he3spzz3>Contact</span><h2 id="contact-title" class="section-title" data-astro-cid-he3spzz3>Discutons de votre projet</h2><div class="gold-line" data-astro-cid-he3spzz3></div><div class="grid grid-2" data-astro-cid-he3spzz3><div class="contact-info" data-astro-cid-he3spzz3><p class="section-subtitle" data-astro-cid-he3spzz3>Je suis disponible pour de nouveaux défis. Contactez-moi pour un échange.</p><a href="mailto:mizegelelmv@gmail.com" class="contact-link" data-astro-cid-he3spzz3>mizegelelmv@gmail.com</a><a href="https://wa.me/243985990399" class="contact-link" data-astro-cid-he3spzz3>WhatsApp</a></div><div class="glass-card contact-form-placeholder" data-astro-cid-he3spzz3><p data-astro-cid-he3spzz3>Un formulaire de contact sécurisé sera bientôt disponible ici.</p></div></div></div></section></div><canvas class="particle-reveal-canvas" aria-hidden="true" data-astro-cid-e2mzjgef></canvas></div><script client:load>(function(){const radius = 300;
+const smoothing = 0.2;
+const particleSize = 1;
+
+  (async () => {
+    if (typeof window === 'undefined') return;
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) return;
+
+    await new Promise(r => requestAnimationFrame(r));
+
+    const sections = document.querySelectorAll('[data-particle-reveal]');
+    try {
+      const { createParticleReveal } = await import(new URL('lib/ParticleReveal.js', document.baseURI).href);
+
+      sections.forEach((sectionEl) => {
+        const content = sectionEl.querySelector('.particle-reveal-content');
+        const canvas = sectionEl.querySelector('.particle-reveal-canvas');
+
+        if (!content || !canvas) return;
+
+        const instance = createParticleReveal(
+          { source: canvas, content, output: canvas },
+          {
+            radius,
+            softness: 0.6,
+            size: particleSize,
+            scatter: 12,
+            drift: 0.2,
+            aberration: 6,
+            bend: 15,
+            fade: 0.85,
+            threshold: 0.08,
+            background: '#08090B',
+            smoothing,
+          }
+        );
+
+        if (instance) {
+          window.addEventListener('beforeunload', () => instance.destroy());
+        }
+      });
+    } catch (e) {
+      console.error('[SectionParticleReveal] Error:', e);
+    }
+  })();
+})();</script></main><footer class="footer" role="contentinfo" data-astro-cid-jo6i4kqk><div class="container" data-astro-cid-jo6i4kqk><div class="footer-grid" data-astro-cid-jo6i4kqk><div class="footer-brand" data-astro-cid-jo6i4kqk><span class="footer-logo" data-astro-cid-jo6i4kqk>LMV Digital</span><p class="footer-bio" data-astro-cid-jo6i4kqk>Développeur web freelance passionné par la création d&#39;expériences numériques modernes, performantes et accessibles.</p></div><nav class="footer-links" aria-label="Navigation pied de page" data-astro-cid-jo6i4kqk><h4 class="footer-heading" data-astro-cid-jo6i4kqk>Navigation</h4><a href="#apropos" data-astro-cid-jo6i4kqk>À propos</a><a href="#competences" data-astro-cid-jo6i4kqk>Compétences</a><a href="#projets" data-astro-cid-jo6i4kqk>Projets</a><a href="#services" data-astro-cid-jo6i4kqk>Services</a><a href="#processus" data-astro-cid-jo6i4kqk>Processus</a><a href="#contact" data-astro-cid-jo6i4kqk>Contact</a></nav><div class="footer-social" data-astro-cid-jo6i4kqk><h4 class="footer-heading" data-astro-cid-jo6i4kqk>Social</h4><div class="social-links" data-astro-cid-jo6i4kqk><a href="https://github.com/mizegelelmv-eng" target="_blank" rel="noopener" data-astro-cid-jo6i4kqk>GitHub</a><a href="https://www.linkedin.com/in/lmv-mizegele-014165445" target="_blank" rel="noopener" data-astro-cid-jo6i4kqk>LinkedIn</a></div></div></div><div class="footer-bottom" data-astro-cid-jo6i4kqk><p data-astro-cid-jo6i4kqk>&copy; 2026 LMV Mizegele. Tous droits réservés.</p></div></div></footer></body></html>
