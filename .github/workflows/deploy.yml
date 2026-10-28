@@ -1,6 +1,5 @@
 # ─────────────────────────────────────
 # Déploiement GitHub Pages — Astro
-# Source : https://docs.astro.build/en/guides/deploy/github/
 # ─────────────────────────────────────
 name: Deploy to GitHub Pages
 
@@ -14,10 +13,6 @@ permissions:
   pages: write
   id-token: write
 
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -25,16 +20,19 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
 
       - name: Install dependencies
         run: npm ci
 
-      - name: Build with Astro
-        run: npx astro build
+      - name: Build
+        run: npm run build
 
-      - name: Upload artifact
+      - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./dist
