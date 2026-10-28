@@ -1,81 +1,46 @@
 ---
 import { SKILLS } from '../config';
+import SectionParticleReveal from './SectionParticleReveal.astro';
 ---
 
-<section id="competences" class="section section-alt" aria-labelledby="skills-title">
-  <div class="container">
-    <p class="reveal section-eyebrow">Compétences</p>
-    <h2 id="skills-title" class="reveal reveal-delay-1 section-title">
-      Technologies &amp; outils
-    </h2>
-    <div class="gold-line reveal reveal-delay-2" aria-hidden="true"></div>
-    <p class="reveal reveal-delay-2 section-subtitle">
-      Un stack moderne et rodé, adapté à chaque besoin.
-    </p>
+<SectionParticleReveal radius={300}>
+  <section id="competences" class="section section-alt" aria-labelledby="skills-title">
+    <div class="container">
+      <span class="section-eyebrow">Compétences</span>
+      <h2 id="skills-title" class="section-title">Technologies & Outils</h2>
+      <div class="gold-line"></div>
+      <p class="section-subtitle">Un écosystème technique maîtrisé pour des solutions performantes.</p>
 
-    <div class="skills-grid">
-      {Object.entries(SKILLS).map(([category, items], i) => (
-        <div class="skill-card reveal reveal-delay-{i + 1}" key={category}>
-          <h3 class="skill-card-title">
-            {category === 'frontend' && 'Frontend'}
-            {category === 'backend' && 'Backend'}
-            {category === 'tools' && 'Outils &amp; méthodologies'}
-          </h3>
+      <div class="grid grid-3">
+        <div class="glass-card">
+          <h3 class="skill-category">Frontend</h3>
           <ul class="skill-list">
-            {items.map((skill) => (
-              <li class="skill-item" key={skill}>
-                <svg class="skill-check" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                {skill}
-              </li>
-            ))}
+            {SKILLS.frontend.map(item => <li>{item}</li>)}
           </ul>
         </div>
-      ))}
+        <div class="glass-card">
+          <h3 class="skill-category">Backend</h3>
+          <ul class="skill-list">
+            {SKILLS.backend.map(item => <li>{item}</li>)}
+          </ul>
+        </div>
+        <div class="glass-card">
+          <h3 class="skill-category">Outils</h3>
+          <ul class="skill-list">
+            {SKILLS.tools.map(item => <li>{item}</li>)}
+          </ul>
+        </div>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
+</SectionParticleReveal>
 
 <style>
-  .section-eyebrow {
-    font-size: var(--text-xs);
-    font-weight: 500;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--color-gold);
-    margin-bottom: var(--space-3);
-  }
-
-  .skills-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--space-6);
-  }
-
-  @media (min-width: 768px) {
-    .skills-grid { grid-template-columns: repeat(3, 1fr); }
-  }
-
-  .skill-card {
-    background: var(--color-bg-card);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
-    padding: var(--space-8);
-    transition: border-color var(--transition-base), transform var(--transition-base);
-  }
-
-  .skill-card:hover {
-    border-color: var(--color-gold);
-    transform: translateY(-4px);
-  }
-
-  .skill-card-title {
+  .skill-category {
     font-family: var(--font-display);
     font-size: var(--text-xl);
-    font-weight: 600;
-    color: var(--color-text);
+    color: var(--color-gold);
     margin-bottom: var(--space-6);
-    padding-bottom: var(--space-4);
-    border-bottom: 1px solid var(--color-border);
   }
 
   .skill-list {
@@ -84,16 +49,22 @@ import { SKILLS } from '../config';
     gap: var(--space-3);
   }
 
-  .skill-item {
-    display: flex;
-    align-items: center;
-    gap: var(--space-3);
+  .skill-list li {
     font-size: var(--text-sm);
     color: var(--color-text-muted);
+    padding-left: var(--space-4);
+    position: relative;
   }
 
-  .skill-check {
-    color: var(--color-gold);
-    flex-shrink: 0;
+  .skill-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 6px;
+    height: 6px;
+    background: var(--color-gold);
+    border-radius: 50%;
   }
 </style>

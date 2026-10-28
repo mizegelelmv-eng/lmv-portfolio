@@ -1,5 +1,7 @@
 ---
 import { PROJECTS } from '../config';
+import SectionParticleReveal from './SectionParticleReveal.astro';
+import GlassCard from './GlassCard.astro';
 import MockupEcommerce from './MockupEcommerce.astro';
 import MockupDashboard from './MockupDashboard.astro';
 import MockupLanding from './MockupLanding.astro';
@@ -11,191 +13,89 @@ const MOCKUPS = {
 };
 ---
 
-<section id="projets" class="section" aria-labelledby="projects-title">
-  <div class="container">
-    <p class="reveal section-eyebrow">Portfolio</p>
-    <h2 id="projects-title" class="reveal reveal-delay-1 section-title">
-      Projets de démonstration
-    </h2>
-    <div class="gold-line reveal reveal-delay-2" aria-hidden="true"></div>
-    <p class="reveal reveal-delay-2 section-subtitle">
-      Des maquettes techniques réalisées pour illustrer mes compétences.
-      Chaque projet est identifié comme démonstration, sans prétention commerciale.
-    </p>
+<SectionParticleReveal radius={350}>
+  <section id="projets" class="section" aria-labelledby="projects-title">
+    <div class="container">
+      <span class="section-eyebrow">Portfolio</span>
+      <h2 id="projects-title" class="section-title">Projets de Démonstration</h2>
+      <div class="gold-line"></div>
+      <p class="section-subtitle">Exploration technique et design sur des thématiques variées.</p>
 
-    <div class="projects-grid">
-      {PROJECTS.map((project, i) => {
-        const MockupComponent = MOCKUPS[project.mockupType as keyof typeof MOCKUPS];
-        return (
-          <article
-            class="project-card reveal reveal-delay-{Math.min(i + 1, 4)}"
-            key={project.id}
-            aria-label={`Projet de démonstration : ${project.title}`}
-          >
-            <div class="project-badge" aria-label="Projet de démonstration">
-              Projet de démonstration
-            </div>
-
-            <div class="project-mockup">
-              {MockupComponent ? <MockupComponent /> : null}
-            </div>
-
-            <div class="project-info">
-              <h3 class="project-title">{project.title}</h3>
-              <p class="project-tagline">{project.tagline}</p>
-              <p class="project-desc">{project.description}</p>
-              <div class="project-tags">
-                {project.tags.map((tag) => (
-                  <span class="project-tag" key={tag}>{tag}</span>
-                ))}
-              </div>
-              <div class="project-links">
-                {project.repoUrl && (
-                  <a href={project.repoUrl} class="project-link" target="_blank" rel="noopener noreferrer">
-                    Code
-                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-                  </a>
-                )}
-                {project.demoUrl && (
-                  <a href={project.demoUrl} class="project-link" target="_blank" rel="noopener noreferrer">
-                    Voir la démo
-                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-                  </a>
-                )}
-                {!project.repoUrl && !project.demoUrl && (
-                  <span class="project-link project-link--disabled">
-                    Liens à venir
-                  </span>
-                )}
-              </div>
-            </div>
-          </article>
-        );
-      })}
+      <div class="grid grid-3">
+        {PROJECTS.map(project => {
+          const Mockup = MOCKUPS[project.mockupType as keyof typeof MOCKUPS];
+          return (
+            <GlassCard key={project.id}>
+              <article class="project-item" data-glass-target>
+                <div class="project-badge">Démonstration</div>
+                <div class="project-mockup">
+                  {Mockup && <Mockup />}
+                </div>
+                <h3 class="project-item-title">{project.title}</h3>
+                <p class="project-item-tagline">{project.tagline}</p>
+                <div class="project-tags">
+                  {project.tags.slice(0, 3).map(tag => <span>{tag}</span>)}
+                </div>
+              </article>
+            </GlassCard>
+          )
+        })}
+      </div>
     </div>
-  </div>
-</section>
+  </section>
+</SectionParticleReveal>
 
 <style>
-  .section-eyebrow {
-    font-size: var(--text-xs);
-    font-weight: 500;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--color-gold);
-    margin-bottom: var(--space-3);
-  }
-
-  .projects-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--space-8);
-  }
-
-  @media (min-width: 768px) {
-    .projects-grid { grid-template-columns: repeat(2, 1fr); }
-  }
-
-  @media (min-width: 1100px) {
-    .projects-grid { grid-template-columns: repeat(3, 1fr); }
-  }
-
-  .project-card {
-    background: var(--color-bg-card);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    transition: border-color var(--transition-base), transform var(--transition-base), box-shadow var(--transition-base);
-  }
-
-  .project-card:hover {
-    border-color: var(--color-gold);
-    transform: translateY(-6px);
-    box-shadow: 0 20px 60px rgba(0,0,0,.4), 0 0 0 1px var(--color-gold);
+  .project-item {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
   }
 
   .project-badge {
-    display: inline-block;
-    margin: var(--space-5) var(--space-5) 0;
-    padding: var(--space-1) var(--space-3);
-    font-size: var(--text-xs);
-    font-weight: 600;
-    letter-spacing: 0.06em;
+    align-self: flex-start;
+    font-size: 10px;
+    font-weight: 700;
     text-transform: uppercase;
     color: var(--color-gold);
-    background: var(--color-gold-subtle);
-    border: 1px solid rgba(201,168,76,.25);
+    border: 1px solid var(--color-gold);
+    padding: 2px 8px;
     border-radius: var(--radius-full);
+    margin-bottom: var(--space-6);
   }
 
   .project-mockup {
-    margin: var(--space-4) var(--space-5);
-    height: 160px;
+    background: var(--color-bg);
     border-radius: var(--radius-md);
+    height: 180px;
+    margin-bottom: var(--space-6);
     overflow: hidden;
-    background: var(--color-bg-elevated);
     border: 1px solid var(--color-border);
   }
 
-  .project-info {
-    padding: 0 var(--space-5) var(--space-6);
-  }
-
-  .project-title {
+  .project-item-title {
     font-family: var(--font-display);
-    font-size: var(--text-2xl);
-    font-weight: 600;
-    color: var(--color-text);
-    margin-bottom: var(--space-1);
+    font-size: var(--text-xl);
+    margin-bottom: var(--space-2);
   }
 
-  .project-tagline {
-    font-size: var(--text-sm);
-    color: var(--color-gold);
-    margin-bottom: var(--space-3);
-  }
-
-  .project-desc {
+  .project-item-tagline {
     font-size: var(--text-sm);
     color: var(--color-text-muted);
-    line-height: 1.7;
-    margin-bottom: var(--space-4);
+    margin-bottom: var(--space-6);
+    flex-grow: 1;
   }
 
   .project-tags {
     display: flex;
-    flex-wrap: wrap;
     gap: var(--space-2);
-    margin-bottom: var(--space-4);
   }
 
-  .project-tag {
-    padding: var(--space-1) var(--space-2);
-    font-size: var(--text-xs);
+  .project-tags span {
+    font-size: 10px;
     color: var(--color-text-dim);
-    background: var(--color-bg);
-    border: 1px solid var(--color-border);
+    background: var(--color-bg-alt);
+    padding: 2px 8px;
     border-radius: var(--radius-sm);
-  }
-
-  .project-links {
-    display: flex;
-    gap: var(--space-4);
-  }
-
-  .project-link {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-2);
-    font-size: var(--text-sm);
-    color: var(--color-text-muted);
-    transition: color var(--transition-fast);
-  }
-
-  .project-link:hover { color: var(--color-gold); }
-
-  .project-link--disabled {
-    color: var(--color-text-dim);
-    cursor: default;
   }
 </style>

@@ -1,0 +1,88 @@
+---
+/**
+ * SectionParticleReveal — Effet de révélation par particules au défilement
+ */
+interface Props {
+  radius?: number;
+  smoothing?: number;
+  particleSize?: number;
+}
+
+const { radius = 300, smoothing = 0.2, particleSize = 1.0 } = Astro.props;
+---
+
+<div class="particle-reveal-section" data-particle-reveal>
+  <div class="particle-reveal-content">
+    <slot />
+  </div>
+  <canvas class="particle-reveal-canvas" aria-hidden="true"></canvas>
+</div>
+
+<style>
+  .particle-reveal-section {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .particle-reveal-content {
+    position: relative;
+    z-index: 1;
+    opacity: 1; /* Toujours visible par défaut pour la résilience */
+  }
+
+  .particle-reveal-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 2;
+  }
+</style>
+
+<script client:load define:vars={{ radius, smoothing, particleSize }}>
+  (async () => {
+    if (typeof window === 'undefined') return;
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) return;
+
+    await new Promise(r => requestAnimationFrame(r));
+
+    const sections = document.querySelectorAll('[data-particle-reveal]');
+    try {
+      const { createParticleReveal } = await import(new URL('lib/ParticleReveal.js', document.baseURI).href);
+
+      sections.forEach((sectionEl) => {
+        const content = sectionEl.querySelector('.particle-reveal-content');
+        const canvas = sectionEl.querySelector('.particle-reveal-canvas');
+
+        if (!content || !canvas) return;
+
+        const instance = createParticleReveal(
+          { source: canvas, content, output: canvas },
+          {
+            radius,
+            softness: 0.6,
+            size: particleSize,
+            scatter: 12,
+            drift: 0.2,
+            aberration: 6,
+            bend: 15,
+            fade: 0.85,
+            threshold: 0.08,
+            background: '#08090B',
+            smoothing,
+          }
+        );
+
+        if (instance) {
+          window.addEventListener('beforeunload', () => instance.destroy());
+        }
+      });
+    } catch (e) {
+      console.error('[SectionParticleReveal] Error:', e);
+    }
+  })();
+</script>

@@ -3,9 +3,10 @@ import { PERSONAL, SITE } from '../config';
 import Head from '../components/Head.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
+
+import '../styles/global.css';
 ---
 
-<!-- BaseLayout — structure HTML5 sémantique, SEO, navigation -->
 <!doctype html>
 <html lang="fr">
   <head>
@@ -13,77 +14,18 @@ import Footer from '../components/Footer.astro';
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/svg+xml" href={`${import.meta.env.BASE_URL}${SITE.favicon}`} />
     <meta name="generator" content={Astro.generator} />
-
-    <!-- SEO -->
     <title>{SITE.title}</title>
     <meta name="description" content={SITE.description} />
     <meta name="author" content={PERSONAL.fullName !== 'À DEFINIR' ? PERSONAL.fullName : 'LMV'} />
     <meta name="robots" content="index, follow" />
-
-    <!-- Open Graph -->
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content={SITE.title} />
-    <meta property="og:description" content={SITE.description} />
-    <meta property="og:url" content={SITE.url} />
-    <meta property="og:image" content={`${SITE.url}/og-image.png`} />
-    <meta property="og:locale" content="fr_FR" />
-
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={SITE.title} />
-    <meta name="twitter:description" content={SITE.description} />
-    <meta name="twitter:image" content={`${SITE.url}/og-image.png`} />
-
-    <!-- JSON-LD structuré -->
-    <script type="application/ld+json" set:html={JSON.stringify({
-      '@context': 'https://schema.org',
-      '@type': 'Person',
-      name: PERSONAL.fullName !== 'À DEFINIR' ? PERSONAL.fullName : 'LMV',
-      url: SITE.url,
-      jobTitle: 'Développeur web freelance',
-      description: SITE.description,
-      ...(PERSONAL.email !== 'À DEFINIR' && { email: PERSONAL.email }),
-      sameAs: [PERSONAL.linkedin, PERSONAL.github]
-        .filter((u): u is string => !!u && u !== 'À DEFINIR'),
-    })} />
-
     <Head />
   </head>
   <body>
-    <a
-      href="#main-content"
-      class="sr-only"
-      style="position:absolute;left:0;top:0;padding:8px 16px;background:#c9a84c;color:#0a0a0a;font-weight:600;z-index:100;"
-      onfocus="this.style.cssText='position:absolute;left:0;top:0;padding:8px 16px;background:#c9a84c;color:#0a0a0a;font-weight:600;z-index:100;'"
-      onblur="this.style.cssText='position:absolute;left:-9999px;'"
-    >
-      Aller au contenu principal
-    </a>
-
+    <a href="#main-content" class="sr-only">Aller au contenu principal</a>
     <Navbar />
     <main id="main-content">
       <slot />
     </main>
     <Footer />
-
-    <!-- Animation au scroll — vanilla JS, ~15 lignes -->
-    <script>
-      if (window.matchMedia('(prefers-reduced-motion: no-preference)').matches) {
-        const observer = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((entry) => {
-              if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-                observer.unobserve(entry.target);
-              }
-            });
-          },
-          { threshold: 0.12 }
-        );
-        document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
-      } else {
-        document.querySelectorAll('.reveal').forEach((el) => el.classList.add('visible'));
-      }
-    </script>
   </body>
 </html>

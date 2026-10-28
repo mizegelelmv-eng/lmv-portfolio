@@ -1,20 +1,11 @@
 ---
-import { PERSONAL, SOCIAL } from '../config';
-
-const navLinks = [
-  { href: '#apropos', label: 'À propos' },
-  { href: '#competences', label: 'Compétences' },
-  { href: '#projets', label: 'Projets' },
-  { href: '#services', label: 'Services' },
-  { href: '#processus', label: 'Processus' },
-  { href: '#contact', label: 'Contact' },
-];
+import { PERSONAL, SITE } from '../config';
 ---
 
 <nav class="navbar" aria-label="Navigation principale">
   <div class="container navbar-inner">
     <a href={`${import.meta.env.BASE_URL || '/'}`} class="navbar-brand" aria-label="Retour à l'accueil">
-      <span class="navbar-logo">LMV</span>
+      <span class="navbar-logo">LMV Digital</span>
     </a>
 
     <button
@@ -24,25 +15,22 @@ const navLinks = [
       aria-label="Ouvrir le menu"
     >
       <span class="navbar-toggle-icon"></span>
+      <span class="navbar-toggle-icon"></span>
+      <span class="navbar-toggle-icon"></span>
     </button>
 
-    <ul id="navbar-menu" class="navbar-menu">
-      {navLinks.map((link) => (
-        <li key={link.href}>
-          <a
-            href={link.href}
-            class="navbar-link"
-          >
-            {link.label}
-          </a>
-        </li>
-      ))}
-    </ul>
+    <div id="navbar-menu" class="navbar-menu-container">
+      <ul class="navbar-menu">
+        <li><a href="#apropos" class="navbar-link">À propos</a></li>
+        <li><a href="#competences" class="navbar-link">Compétences</a></li>
+        <li><a href="#projets" class="navbar-link">Projets</a></li>
+        <li><a href="#services" class="navbar-link">Services</a></li>
+        <li><a href="#processus" class="navbar-link">Processus</a></li>
+        <li><a href="#contact" class="navbar-link">Contact</a></li>
+      </ul>
+    </div>
 
-    <a
-      href="#contact"
-      class="navbar-cta"
-    >
+    <a href="#contact" class="btn btn-primary navbar-cta">
       Me contacter
     </a>
   </div>
@@ -54,19 +42,21 @@ const navLinks = [
     top: 0;
     left: 0;
     right: 0;
-    z-index: 50;
-    background: rgba(10, 10, 10, 0.85);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(255,255,255,0.06);
+    z-index: 100;
+    background: rgba(8, 9, 11, 0.8);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--color-border);
     height: var(--nav-height);
+    display: flex;
+    align-items: center;
   }
 
   .navbar-inner {
     display: flex;
     align-items: center;
-    height: 100%;
-    gap: var(--space-6);
+    justify-content: space-between;
+    width: 100%;
   }
 
   .navbar-brand {
@@ -74,95 +64,107 @@ const navLinks = [
     font-size: var(--text-xl);
     font-weight: 700;
     color: var(--color-gold);
-    letter-spacing: 0.08em;
-    flex-shrink: 0;
+    letter-spacing: 0.05em;
+  }
+
+  .navbar-menu-container {
+    display: none;
   }
 
   .navbar-menu {
-    display: none;
-    gap: var(--space-1);
-    margin: 0 auto;
+    display: flex;
+    gap: var(--space-2);
   }
 
   .navbar-link {
-    display: block;
-    padding: var(--space-2) var(--space-3);
+    padding: var(--space-2) var(--space-4);
     font-size: var(--text-sm);
+    font-weight: 500;
     color: var(--color-text-muted);
     border-radius: var(--radius-sm);
-    transition: color var(--transition-fast), background var(--transition-fast);
-    letter-spacing: 0.02em;
+    transition: all var(--transition-fast);
   }
 
-  .navbar-link:hover,
-  .navbar-link:focus-visible {
-    color: var(--color-text);
+  .navbar-link:hover {
+    color: var(--color-gold);
     background: var(--color-gold-subtle);
   }
 
   .navbar-cta {
     display: none;
-    padding: var(--space-2) var(--space-5);
-    font-size: var(--text-sm);
-    font-weight: 500;
-    color: var(--color-bg);
-    background: var(--color-gold);
-    border-radius: var(--radius-full);
-    transition: background var(--transition-fast);
-    flex-shrink: 0;
+    padding: var(--space-2) var(--space-6);
   }
-
-  .navbar-cta:hover { background: var(--color-gold-hover); }
 
   .navbar-toggle {
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 6px;
     padding: var(--space-2);
-    margin-left: auto;
+    z-index: 110;
   }
 
   .navbar-toggle-icon {
-    width: 22px;
+    width: 24px;
     height: 2px;
-    background: var(--color-text);
+    background: var(--color-gold);
     border-radius: 2px;
-    transition: transform var(--transition-base), opacity var(--transition-base);
+    transition: all var(--transition-base);
   }
 
-  .navbar-toggle[aria-expanded="true"] .navbar-toggle-icon:nth-child(1) {
-    transform: translateY(7px) rotate(45deg);
-  }
-  .navbar-toggle[aria-expanded="true"] .navbar-toggle-icon:nth-child(2) {
-    opacity: 0;
-  }
-  .navbar-toggle[aria-expanded="true"] .navbar-toggle-icon:nth-child(3) {
-    transform: translateY(-7px) rotate(-45deg);
+  @media (min-width: 1024px) {
+    .navbar-menu-container {
+      display: block;
+    }
+    .navbar-cta {
+      display: inline-flex;
+    }
+    .navbar-toggle {
+      display: none;
+    }
   }
 
-  @media (min-width: 900px) {
-    .navbar-menu { display: flex; }
-    .navbar-cta { display: inline-flex; }
-    .navbar-toggle { display: none; }
+  /* Mobile Open State */
+  :global(.nav-open) .navbar-menu-container {
+    display: flex;
+    position: fixed;
+    inset: 0;
+    background: var(--color-bg);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 105;
   }
+
+  :global(.nav-open) .navbar-menu {
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-8);
+  }
+
+  :global(.nav-open) .navbar-link {
+    font-size: var(--text-2xl);
+    font-family: var(--font-display);
+  }
+
+  :global(.nav-open) .navbar-toggle-icon:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+  :global(.nav-open) .navbar-toggle-icon:nth-child(2) { opacity: 0; }
+  :global(.nav-open) .navbar-toggle-icon:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
 </style>
 
 <script>
   const toggle = document.querySelector('.navbar-toggle');
-  const menu = document.getElementById('navbar-menu');
-  if (toggle && menu) {
-    toggle.addEventListener('click', () => {
-      const open = toggle.getAttribute('aria-expanded') === 'true';
-      toggle.setAttribute('aria-expanded', String(!open));
-      menu.hidden = open;
-    });
+  const links = document.querySelectorAll('.navbar-link');
 
-    /* Fermer le menu au clic sur un lien */
-    menu.querySelectorAll('.navbar-link, .navbar-cta').forEach((el) => {
-      el.addEventListener('click', () => {
-        toggle.setAttribute('aria-expanded', 'false');
-        menu.hidden = true;
-      });
+  toggle?.addEventListener('click', () => {
+    document.body.classList.toggle('nav-open');
+    const isOpen = document.body.classList.contains('nav-open');
+    toggle.setAttribute('aria-expanded', String(isOpen));
+  });
+
+  links.forEach(link => {
+    link.addEventListener('click', () => {
+      document.body.classList.remove('nav-open');
+      toggle?.setAttribute('aria-expanded', 'false');
     });
-  }
+  });
 </script>

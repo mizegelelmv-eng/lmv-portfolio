@@ -1,0 +1,107 @@
+---
+/**
+ * GlassCard — Carte avec effet de verre dépoli au survol
+ */
+interface Props {
+  targetSelector?: string;
+  size?: number;
+  ior?: number;
+  opacity?: number;
+  key?: any;
+}
+
+const { targetSelector = '[data-glass-target]', size = 100, ior = 1.45, opacity = 0.6 } = Astro.props;
+---
+
+<div class="glass-card-wrapper" data-glass-wrapper>
+  <div class="glass-card">
+    <slot />
+  </div>
+</div>
+
+<style>
+  .glass-card-wrapper {
+    position: relative;
+    height: 100%;
+  }
+
+  /* Canvases injectés dynamiquement */
+  :global(.glass-canvas-source) {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 1px;
+    height: 1px;
+    visibility: hidden;
+    pointer-events: none;
+    opacity: 0;
+  }
+
+  :global(.glass-canvas-output) {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 1px;
+    height: 1px;
+    visibility: hidden;
+    pointer-events: none;
+    opacity: 0;
+    z-index: 1000;
+  }
+</style>
+
+<script client:load define:vars={{ targetSelector, size, ior }}>
+  (async () => {
+    if (typeof window === 'undefined') return;
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) return;
+
+    // Utilisation d'un délai pour s'assurer que le DOM est stable
+    await new Promise(r => setTimeout(r, 100));
+
+    const wrappers = document.querySelectorAll('[data-glass-wrapper]');
+    // On ne traite que le dernier ajouté pour éviter les duplicatas dans la boucle Astro
+    const wrapper = Array.from(wrappers).pop();
+
+    if (!wrapper) return;
+
+    const content = wrapper.querySelector(targetSelector);
+    if (!content) return;
+
+    try {
+      const { createGlass } = await import(new URL('lib/Glass.js', document.baseURI).href);
+
+      const sourceCanvas = document.createElement('canvas');
+      sourceCanvas.className = 'glass-canvas-source';
+      document.body.appendChild(sourceCanvas);
+
+      const outputCanvas = document.createElement('canvas');
+      outputCanvas.className = 'glass-canvas-output';
+      document.body.appendChild(outputCanvas);
+
+      const instance = createGlass(
+        { source: sourceCanvas, content, output: outputCanvas },
+        {
+          shape: 'circle',
+          size,
+          ior,
+          edge: 0.6,
+          bevel: 3,
+          depth: 180,
+          aberration: 0.6,
+          blur: 0.3,
+          reflection: 0.8,
+          shine: 0.05,
+          zoom: 1.4,
+          targets: targetSelector,
+          follow: 0.35,
+        }
+      );
+
+      window.addEventListener('beforeunload', () => instance?.destroy());
+    } catch (e) {
+      console.error('[GlassCard] Error:', e);
+    }
+  })();
+</script>
