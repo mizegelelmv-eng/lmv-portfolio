@@ -28,6 +28,24 @@ const instanceId = `glass-${Math.random().toString(36).slice(2, 9)}`;
     height: 100%;
   }
 
+  /* Fallback CSS natif — appliqué si WebGL indisponible */
+  .glass-card {
+    background: rgba(20, 20, 25, 0.45);
+    backdrop-filter: blur(16px) saturate(140%);
+    -webkit-backdrop-filter: blur(16px) saturate(140%);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 16px;
+    box-shadow:
+      0 8px 32px rgba(0, 0, 0, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    transition: background 0.3s ease, border-color 0.3s ease;
+  }
+
+  .glass-card:hover {
+    background: rgba(25, 25, 32, 0.55);
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+
   /* Canvases injectés dynamiquement */
   :global(.glass-canvas-source) {
     position: fixed;
