@@ -209,7 +209,11 @@ export function createGlass(elements: GlassElements, options: GlassOptions = {})
   const config = { ...DEFAULTS, ...options };
   const { source, content, output } = elements;
 
-  const gl = output.getContext("webgl2", { alpha: true, depth: false, stencil: false, antialias: false, premultipliedAlpha: true });
+  // Try WebGL2 first, fall back to WebGL1
+  let gl = output.getContext("webgl2", { alpha: true, depth: false, stencil: false, antialias: false, premultipliedAlpha: true });
+  if (!gl) {
+    gl = output.getContext("webgl", { alpha: true, depth: false, stencil: false, antialias: false, premultipliedAlpha: true });
+  }
   if (!gl || gl.isContextLost()) return null;
 
   const sourceCtx = source.getContext("2d") as ElementImageContext | null;
