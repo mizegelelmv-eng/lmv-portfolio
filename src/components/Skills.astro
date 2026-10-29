@@ -1,36 +1,48 @@
 ---
 import { SKILLS } from '../config';
 import SectionParticleReveal from './SectionParticleReveal.astro';
+import ScrollReveal from './ScrollReveal.astro';
 ---
 
 <SectionParticleReveal radius={300}>
   <section id="competences" class="section section-alt" aria-labelledby="skills-title">
     <div class="container">
-      <span class="section-eyebrow">Compétences</span>
-      <h2 id="skills-title" class="section-title">Technologies & Outils</h2>
-      <div class="gold-line"></div>
-      <p class="section-subtitle">Un écosystème technique maîtrisé pour des solutions performantes.</p>
+      <ScrollReveal threshold={0.15}>
+        <span class="section-eyebrow reveal">Compétences</span>
+        <h2 id="skills-title" class="section-title reveal reveal-delay-1">Technologies maîtrisées</h2>
+        <div class="gold-line reveal reveal-delay-2"></div>
+        <p class="section-subtitle reveal reveal-delay-2">Technologies utilisées quotidiennement pour créer des sites performants.</p>
+      </ScrollReveal>
 
       <div class="grid grid-3">
-        <div class="glass-card">
-          <h3 class="skill-category">Frontend</h3>
-          <ul class="skill-list">
-            {SKILLS.frontend.map(item => <li>{item}</li>)}
-          </ul>
-        </div>
-        <div class="glass-card">
-          <h3 class="skill-category">Backend</h3>
-          <ul class="skill-list">
-            {SKILLS.backend.map(item => <li>{item}</li>)}
-          </ul>
-        </div>
-        <div class="glass-card">
-          <h3 class="skill-category">Outils</h3>
-          <ul class="skill-list">
-            {SKILLS.tools.map(item => <li>{item}</li>)}
-          </ul>
-        </div>
+        <ScrollReveal threshold={0.2}>
+          <div class="glass-card reveal reveal-shimmer reveal-delay-1">
+            <h3 class="skill-category">Frontend</h3>
+            <ul class="skill-list">
+              {SKILLS.frontend.map(item => <li>{item}</li>)}
+            </ul>
+          </div>
+        </ScrollReveal>
+        <ScrollReveal threshold={0.2}>
+          <div class="glass-card reveal reveal-shimmer reveal-delay-2">
+            <h3 class="skill-category">Outils</h3>
+            <ul class="skill-list">
+              {SKILLS.tools.map(item => <li>{item}</li>)}
+            </ul>
+          </div>
+        </ScrollReveal>
       </div>
+
+      {SKILLS.learning.length > 0 && (
+        <ScrollReveal threshold={0.2}>
+          <div class="learning-section reveal reveal-shimmer reveal-delay-3">
+            <h3 class="learning-title">En cours d'apprentissage</h3>
+            <ul class="learning-list">
+              {SKILLS.learning.map(item => <li>{item}</li>)}
+            </ul>
+          </div>
+        </ScrollReveal>
+      )}
     </div>
   </section>
 </SectionParticleReveal>
@@ -66,5 +78,36 @@ import SectionParticleReveal from './SectionParticleReveal.astro';
     height: 6px;
     background: var(--color-gold);
     border-radius: 50%;
+  }
+
+  .learning-section {
+    margin-top: var(--space-10);
+    padding: var(--space-6);
+    background: var(--color-bg-card);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-border);
+  }
+
+  .learning-title {
+    font-family: var(--font-display);
+    font-size: var(--text-lg);
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-4);
+  }
+
+  .learning-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    list-style: none;
+  }
+
+  .learning-list li {
+    font-size: var(--text-sm);
+    color: var(--color-text-dim);
+    padding: var(--space-2) var(--space-3);
+    background: var(--color-bg-elevated);
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--color-border);
   }
 </style>

@@ -1,6 +1,7 @@
 ---
 /**
  * GlassCard — Carte avec effet de verre dépoli au survol
+ * Chaque instance reçoit un ID unique pour initialiser son propre wrapper
  */
 interface Props {
   targetSelector?: string;
@@ -10,10 +11,12 @@ interface Props {
   key?: any;
 }
 
-const { targetSelector = '[data-glass-target]', size = 100, ior = 1.45, opacity = 0.6 } = Astro.props;
+const { targetSelector = '[data-glass-target]', size = 100, ior = 1.45, opacity = 0.6, key } = Astro.props;
+// Générer un ID unique stable pour cette instance de composant
+const instanceId = `glass-${Math.random().toString(36).slice(2, 9)}`;
 ---
 
-<div class="glass-card-wrapper" data-glass-wrapper>
+<div class="glass-card-wrapper" data-glass-wrapper data-glass-id={Math.random().toString(36).slice(2, 9)}>
   <div class="glass-card">
     <slot />
   </div>
@@ -50,36 +53,52 @@ const { targetSelector = '[data-glass-target]', size = 100, ior = 1.45, opacity 
   }
 </style>
 
-<script client:load define:vars={{ targetSelector, size, ior }}>
+<script type="module" client:load define:vars={{ targetSelector, size, ior }}>
   (async () => {
     if (typeof window === 'undefined') return;
 
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReducedMotion) return;
 
-    // Utilisation d'un délai pour s'assurer que le DOM est stable
-    await new Promise(r => setTimeout(r, 100));
+    await new Promise(r => requestAnimationFrame(r));
 
-    const wrappers = document.querySelectorAll('[data-glass-wrapper]');
-    // On ne traite que le dernier ajouté pour éviter les duplicatas dans la boucle Astro
-    const wrapper = Array.from(wrappers).pop();
+    // Find THIS component's wrapper — each script is inside a [data-scroll-reveal] after its wrapper
+    const wrappers = document.querySelectorAll('[data-glass-wrapper]:not([data-glass-initialized])');
+    let wrapper = null;
+    document.querySelectorAll('script[type="module"]').forEach(script => {
+      if (!script.textContent.includes('createGlass')) return;
+      const scrollReveal = script.closest('[data-scroll-reveal]');
+      if (!scrollReveal) return;
+      const card = scrollReveal.querySelector(':scope > .glass-card-wrapper');
+      if (card && !card.hasAttribute('data-glass-initialized')) wrapper = card;
+    });
+    if (!wrapper || wrapper.hasAttribute('data-glass-initialized')) return;
+    wrapper.setAttribute('data-glass-initialized', '');
 
-    if (!wrapper) return;
-
-    const content = wrapper.querySelector(targetSelector);
+    const targetSelector = "[data-glass-target]";
+    const content = wrapper.querySelector<HTMLElement>(targetSelector);
     if (!content) return;
 
+    const sourceCanvas = document.createElement('canvas');
+    sourceCanvas.className = 'glass-canvas-source';
+    sourceCanvas.style.position = 'fixed';
+    sourceCanvas.style.top = '0';
+    sourceCanvas.style.left = '0';
+    sourceCanvas.style.width = '1px';
+    sourceCanvas.style.height = '1px';
+    document.body.appendChild(sourceCanvas);
+
+    const outputCanvas = document.createElement('canvas');
+    outputCanvas.className = 'glass-canvas-output';
+    outputCanvas.style.position = 'fixed';
+    outputCanvas.style.top = '0';
+    outputCanvas.style.left = '0';
+    outputCanvas.style.width = '1px';
+    outputCanvas.style.height = '1px';
+    document.body.appendChild(outputCanvas);
+
     try {
-      const { createGlass } = await import(new URL('lib/Glass.js', document.baseURI).href);
-
-      const sourceCanvas = document.createElement('canvas');
-      sourceCanvas.className = 'glass-canvas-source';
-      document.body.appendChild(sourceCanvas);
-
-      const outputCanvas = document.createElement('canvas');
-      outputCanvas.className = 'glass-canvas-output';
-      document.body.appendChild(outputCanvas);
-
+      const { createGlass } = await import(new URL('/lmv-portfolio/lib/Glass.js', window.location.origin).href);
       const instance = createGlass(
         { source: sourceCanvas, content, output: outputCanvas },
         {
@@ -98,10 +117,15 @@ const { targetSelector = '[data-glass-target]', size = 100, ior = 1.45, opacity 
           follow: 0.35,
         }
       );
-
-      window.addEventListener('beforeunload', () => instance?.destroy());
+      if (!instance) {
+        sourceCanvas.remove();
+        outputCanvas.remove();
+        return;
+      }
+      window.addEventListener('beforeunload', () => instance.destroy());
     } catch (e) {
-      console.error('[GlassCard] Error:', e);
+      sourceCanvas.remove();
+      outputCanvas.remove();
     }
   })();
 </script>

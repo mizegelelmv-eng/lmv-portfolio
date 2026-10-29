@@ -41,7 +41,7 @@ const { radius = 300, smoothing = 0.2, particleSize = 1.0 } = Astro.props;
   }
 </style>
 
-<script client:load define:vars={{ radius, smoothing, particleSize }}>
+<script type="module" client:load define:vars={{ radius, smoothing, particleSize }}>
   (async () => {
     if (typeof window === 'undefined') return;
 
@@ -52,7 +52,7 @@ const { radius = 300, smoothing = 0.2, particleSize = 1.0 } = Astro.props;
 
     const sections = document.querySelectorAll('[data-particle-reveal]');
     try {
-      const { createParticleReveal } = await import(new URL('lib/ParticleReveal.js', document.baseURI).href);
+      const { createParticleReveal } = await import(new URL('/lmv-portfolio/lib/ParticleReveal.js', window.location.origin).href);
 
       sections.forEach((sectionEl) => {
         const content = sectionEl.querySelector('.particle-reveal-content');
@@ -77,9 +77,11 @@ const { radius = 300, smoothing = 0.2, particleSize = 1.0 } = Astro.props;
           }
         );
 
-        if (instance) {
-          window.addEventListener('beforeunload', () => instance.destroy());
+        if (!instance) {
+          canvas.remove();
+          return;
         }
+        window.addEventListener('beforeunload', () => instance.destroy());
       });
     } catch (e) {
       console.error('[SectionParticleReveal] Error:', e);

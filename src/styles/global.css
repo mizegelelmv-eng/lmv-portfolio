@@ -4,22 +4,23 @@
 
 /* ── Tokens / Design Variables ───────────────────────────── */
 :root {
-  --color-bg: #08090B;
-  --color-bg-alt: #111318;
-  --color-bg-card: #17191F;
-  --color-bg-elevated: #1F2229;
+  /* Palette Crystal Flow — Noir & Or Premium */
+  --color-bg: #070708;
+  --color-bg-alt: #0D0E11;
+  --color-bg-card: rgba(23, 25, 31, 0.72);
+  --color-bg-elevated: #13151A;
 
-  --color-gold: #D4AF37;
-  --color-gold-hover: #F2D06B;
-  --color-gold-subtle: rgba(212, 175, 55, 0.1);
+  --color-gold: #D8B44A;
+  --color-gold-hover: #F5D77A;
+  --color-gold-subtle: rgba(216, 180, 74, 0.08);
 
-  --color-text: #F5F5F5;
-  --color-text-muted: #A6A8B0;
+  --color-text: #F5F3ED;
+  --color-text-muted: #A5A5AA;
   --color-text-dim: #6B6D75;
 
-  --color-border: rgba(255, 255, 255, 0.08);
-  --color-border-hover: rgba(255, 255, 255, 0.15);
-  --color-white: #ffffff;
+  --color-border: rgba(216, 180, 74, 0.12);
+  --color-border-hover: rgba(216, 180, 74, 0.25);
+  --color-white: #F5F3ED;
 
   --font-display: 'Playfair Display', Georgia, serif;
   --font-body: 'Inter', system-ui, -apple-system, sans-serif;
@@ -205,12 +206,42 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   padding: var(--space-8);
-  transition: border-color var(--transition-base), transform var(--transition-base), box-shadow var(--transition-base);
+  transition: border-color var(--transition-base),
+              transform var(--transition-base),
+              box-shadow var(--transition-base);
+  position: relative;
+  overflow: hidden;
 }
+
+.glass-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    135deg,
+    rgba(212, 175, 55, 0.15),
+    transparent 50%,
+    rgba(212, 175, 55, 0.05)
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--transition-base);
+}
+
+.glass-card:hover::after { opacity: 1; }
+
 .glass-card:hover {
   border-color: var(--color-gold);
   transform: translateY(-4px);
-  box-shadow: 0 16px 40px rgba(0,0,0,0.5), 0 0 0 1px var(--color-gold);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.5),
+              0 0 0 1px rgba(212, 175, 55, 0.3),
+              inset 0 1px 0 rgba(212, 175, 55, 0.08);
 }
 
 .badge {
@@ -255,12 +286,23 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
 .form-textarea { min-height: 150px; resize: vertical; }
 
 /* ── Animations ──────────────────────────────────────────── */
-.reveal {
-  opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+/* Par défaut (pas de JS ou JS chargé) : visible */
+html:not(.no-js) .reveal {
+  opacity: 1;
+  transform: translateY(0) scale(1);
 }
-.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* Au chargement JS — état initial avant IntersectionObserver */
+html.js-ready .reveal {
+  opacity: 0;
+  transform: translateY(32px) scale(0.97);
+  transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+html.js-ready .reveal.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
 .reveal-delay-1 { transition-delay: 100ms; }
 .reveal-delay-2 { transition-delay: 200ms; }
 .reveal-delay-3 { transition-delay: 300ms; }
@@ -268,3 +310,32 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
 
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 .fade-in { animation: fadeIn 1s ease-in forwards; }
+
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+.reveal-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+.reveal-shimmer::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg,
+    transparent 40%,
+    rgba(212, 175, 55, 0.06) 48%,
+    rgba(212, 175, 55, 0.12) 50%,
+    rgba(212, 175, 55, 0.06) 52%,
+    transparent 60%
+  );
+  background-size: 200% 100%;
+  background-repeat: no-repeat;
+  background-position: -200% center;
+  pointer-events: none;
+  z-index: 1;
+}
+.reveal-shimmer.shimmer-active::before {
+  animation: shimmer 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}

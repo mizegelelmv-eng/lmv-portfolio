@@ -1,23 +1,28 @@
 ---
 import { PROCESS } from '../config';
 import SectionParticleReveal from './SectionParticleReveal.astro';
+import ScrollReveal from './ScrollReveal.astro';
 ---
 
 <SectionParticleReveal radius={300}>
   <section id="processus" class="section" aria-labelledby="process-title">
     <div class="container">
-      <span class="section-eyebrow">Processus</span>
-      <h2 id="process-title" class="section-title">Comment je travaille</h2>
-      <div class="gold-line"></div>
-      <p class="section-subtitle">Une méthodologie rigoureuse pour garantir la qualité et le respect des délais.</p>
+      <ScrollReveal threshold={0.15}>
+        <span class="section-eyebrow reveal">Processus</span>
+        <h2 id="process-title" class="section-title reveal reveal-delay-1">Comment je travaille</h2>
+        <div class="gold-line reveal reveal-delay-2"></div>
+        <p class="section-subtitle reveal reveal-delay-2">Une méthodologie rigoureuse pour garantir la qualité et le respect des délais.</p>
+      </ScrollReveal>
 
       <div class="grid grid-4">
-        {PROCESS.map(step => (
-          <div class="glass-card process-card">
-            <span class="process-number">0{step.step}</span>
-            <h3 class="process-step-title">{step.title}</h3>
-            <p class="process-step-desc">{step.description}</p>
-          </div>
+        {PROCESS.map((step, i) => (
+          <ScrollReveal threshold={0.2}>
+            <div class="glass-card process-card reveal reveal-shimmer" style={`transition-delay: ${i * 80}ms`}>
+              <span class="process-number">0{step.step}</span>
+              <h3 class="process-step-title">{step.title}</h3>
+              <p class="process-step-desc">{step.description}</p>
+            </div>
+          </ScrollReveal>
         ))}
       </div>
     </div>

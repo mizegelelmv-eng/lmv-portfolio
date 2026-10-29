@@ -2,24 +2,29 @@
 import { SERVICES } from '../config';
 import SectionParticleReveal from './SectionParticleReveal.astro';
 import GlassCard from './GlassCard.astro';
+import ScrollReveal from './ScrollReveal.astro';
 ---
 
 <SectionParticleReveal radius={300}>
   <section id="services" class="section section-alt" aria-labelledby="services-title">
     <div class="container">
-      <span class="section-eyebrow">Services</span>
-      <h2 id="services-title" class="section-title">Ce que je propose</h2>
-      <div class="gold-line"></div>
-      <p class="section-subtitle">Des prestations sur-mesure pour donner vie à vos projets numériques.</p>
+      <ScrollReveal threshold={0.15}>
+        <span class="section-eyebrow reveal">Services</span>
+        <h2 id="services-title" class="section-title reveal reveal-delay-1">Ce que je propose</h2>
+        <div class="gold-line reveal reveal-delay-2"></div>
+        <p class="section-subtitle reveal reveal-delay-2">Des prestations sur-mesure pour donner vie à vos projets numériques.</p>
+      </ScrollReveal>
 
       <div class="grid grid-2">
-        {SERVICES.map(service => (
-          <GlassCard key={service.title}>
-            <div data-glass-target class="service-item">
-              <h3 class="service-title">{service.title}</h3>
-              <p class="service-description">{service.description}</p>
-            </div>
-          </GlassCard>
+        {SERVICES.map((service, i) => (
+          <ScrollReveal threshold={0.2} triggerOnce={true}>
+            <GlassCard>
+              <div data-glass-target class="service-item reveal reveal-shimmer" style={`transition-delay: ${i * 100}ms`}>
+                <h3 class="service-title">{service.title}</h3>
+                <p class="service-description">{service.description}</p>
+              </div>
+            </GlassCard>
+          </ScrollReveal>
         ))}
       </div>
     </div>

@@ -56,7 +56,7 @@ const { color = [1.0, 0.84, 0.0], intensity = 1.5, distortion = 0.25 } = Astro.p
   }
 </style>
 
-<script client:load define:vars={{ color, intensity, distortion }}>
+<script type="module" client:load define:vars={{ color, intensity, distortion }}>
   (async () => {
     if (typeof window === 'undefined') return;
 
@@ -68,7 +68,7 @@ const { color = [1.0, 0.84, 0.0], intensity = 1.5, distortion = 0.25 } = Astro.p
     }
 
     try {
-      const { createLiquid } = await import(new URL('lib/Liquid.js', document.baseURI).href);
+      const { createLiquid } = await import(new URL('/lmv-portfolio/lib/Liquid.js', window.location.origin).href);
       const sourceCanvas = document.getElementById('liquid-source');
       const content = document.getElementById('liquid-content');
 

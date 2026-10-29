@@ -1,21 +1,23 @@
 :root {
-  /* Palette Premium - Noir & Or */
-  --color-bg: #08090B;          /* Fond principal profond */
-  --color-bg-alt: #111318;      /* Fond alternatif */
-  --color-bg-card: #17191F;     /* Surface des cartes */
-  --color-bg-elevated: #1F2229;  /* Surface surélevée */
+  /* Palette Crystal Flow — Noir & Or Premium */
+  --color-bg: #070708;
+  --color-bg-alt: #0D0E11;
+  --color-bg-card: rgba(23, 25, 31, 0.72);
+  --color-bg-elevated: #13151A;
 
-  --color-gold: #D4AF37;        /* Or principal */
-  --color-gold-hover: #F2D06B;  /* Or plus clair au survol */
-  --color-gold-subtle: rgba(212, 175, 55, 0.1);
+  --color-gold: #D8B44A;
+  --color-gold-light: #F5D77A;
+  --color-gold-dark: #8F6A20;
+  --color-gold-subtle: rgba(216, 180, 74, 0.08);
+  --color-gold-border: rgba(216, 180, 74, 0.18);
 
-  --color-text: #F5F5F5;        /* Texte principal (blanc cassé) */
-  --color-text-muted: #A6A8B0;  /* Texte secondaire */
-  --color-text-dim: #6B6D75;    /* Texte désactivé / tertiaire */
+  --color-text: #F5F3ED;
+  --color-text-muted: #A5A5AA;
+  --color-text-dim: #6B6D75;
 
-  --color-border: rgba(255, 255, 255, 0.08);
-  --color-border-hover: rgba(255, 255, 255, 0.15);
-  --color-white: #ffffff;
+  --color-border: rgba(216, 180, 74, 0.12);
+  --color-border-hover: rgba(216, 180, 74, 0.25);
+  --color-white: #F5F3ED;
 
   /* Typographie */
   --font-display: 'Playfair Display', Georgia, serif;

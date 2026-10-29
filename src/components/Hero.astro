@@ -1,6 +1,8 @@
 ---
 import { SITE } from '../config';
 import LiquidHero from './LiquidHero.astro';
+import ScrollReveal from './ScrollReveal.astro';
+import Crystal from './Crystal.astro';
 ---
 
 <section class="hero" aria-label="Accueil">
@@ -8,19 +10,25 @@ import LiquidHero from './LiquidHero.astro';
     <div class="hero-background-fallback"></div>
   </LiquidHero>
 
+  <div class="hero-crystal crystal-hero">
+    <Crystal size={180} opacity={0.25} rotation={12} delay={0} />
+  </div>
+
   <div class="container hero-content">
-    <span class="section-eyebrow reveal">LMV Digital</span>
-    <h1 class="hero-title reveal reveal-delay-1">
-      Développeur Web <span class="text-gold">Freelance</span>
-    </h1>
-    <p class="hero-description reveal reveal-delay-2">
-      Je conçois des expériences numériques <span class="text-white">modernes</span>,
-      performantes et <span class="text-white">sur-mesure</span> pour propulser votre activité.
-    </p>
-    <div class="hero-actions reveal reveal-delay-3">
-      <a href="#projets" class="btn btn-primary">Voir mes projets</a>
-      <a href="#contact" class="btn btn-outline">Me contacter</a>
-    </div>
+    <ScrollReveal threshold={0.3}>
+      <span class="section-eyebrow reveal">LMV Digital</span>
+      <h1 class="hero-title reveal reveal-delay-1">
+        Développeur Web <span class="text-gold">Freelance</span>
+      </h1>
+      <p class="hero-description reveal reveal-delay-2">
+        Je conçois des expériences numériques <span class="text-white">modernes</span>,
+        performantes et <span class="text-white">sur-mesure</span> pour propulser votre activité.
+      </p>
+      <div class="hero-actions reveal reveal-delay-3">
+        <a href="#projets" class="btn btn-primary">Voir mes projets</a>
+        <a href="#contact" class="btn btn-outline">Me contacter</a>
+      </div>
+    </ScrollReveal>
   </div>
 </section>
 
@@ -37,7 +45,24 @@ import LiquidHero from './LiquidHero.astro';
   .hero-background-fallback {
     position: absolute;
     inset: 0;
-    background: radial-gradient(circle at 70% 30%, rgba(212, 175, 55, 0.05), transparent 50%);
+    background: radial-gradient(ellipse at 70% 30%, rgba(216, 180, 74, 0.06) 0%, transparent 55%),
+                radial-gradient(ellipse at 20% 80%, rgba(216, 180, 74, 0.04) 0%, transparent 40%);
+    pointer-events: none;
+  }
+
+  .hero-crystal {
+    position: absolute;
+    top: 50%;
+    right: 8%;
+    transform: translateY(-50%);
+    width: 200px;
+    height: 240px;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .hero-crystal svg {
+    filter: drop-shadow(0 0 40px rgba(216, 180, 74, 0.15));
   }
 
   .hero-content {
@@ -51,6 +76,7 @@ import LiquidHero from './LiquidHero.astro';
     font-size: clamp(var(--text-4xl), 8vw, var(--text-5xl));
     line-height: 1.1;
     margin-bottom: var(--space-6);
+    letter-spacing: -0.01em;
   }
 
   .text-gold {
@@ -66,13 +92,19 @@ import LiquidHero from './LiquidHero.astro';
     color: var(--color-text-muted);
     max-width: 600px;
     margin-bottom: var(--space-10);
-    line-height: 1.6;
+    line-height: 1.7;
   }
 
   .hero-actions {
     display: flex;
     gap: var(--space-4);
     flex-wrap: wrap;
+  }
+
+  @media (max-width: 768px) {
+    .hero-crystal {
+      display: none;
+    }
   }
 
   @media (max-width: 480px) {

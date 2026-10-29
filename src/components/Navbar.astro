@@ -43,13 +43,19 @@ import { PERSONAL, SITE } from '../config';
     left: 0;
     right: 0;
     z-index: 100;
-    background: rgba(8, 9, 11, 0.8);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
+    background: rgba(7, 7, 8, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--color-border);
     height: var(--nav-height);
     display: flex;
     align-items: center;
+    transition: background var(--transition-base), border-color var(--transition-base);
+  }
+
+  .navbar.scrolled {
+    background: rgba(7, 7, 8, 0.95);
+    border-bottom-color: var(--color-gold-border);
   }
 
   .navbar-inner {
@@ -154,6 +160,7 @@ import { PERSONAL, SITE } from '../config';
 <script>
   const toggle = document.querySelector('.navbar-toggle');
   const links = document.querySelectorAll('.navbar-link');
+  const navbar = document.querySelector('.navbar');
 
   toggle?.addEventListener('click', () => {
     document.body.classList.toggle('nav-open');
@@ -167,4 +174,16 @@ import { PERSONAL, SITE } from '../config';
       toggle?.setAttribute('aria-expanded', 'false');
     });
   });
+
+  // Ajouter la classe scrolled au scroll
+  let lastScroll = 0;
+  window.addEventListener('scroll', () => {
+    const currentScroll = window.pageYOffset;
+    if (currentScroll > 50) {
+      navbar?.classList.add('scrolled');
+    } else {
+      navbar?.classList.remove('scrolled');
+    }
+    lastScroll = currentScroll;
+  }, { passive: true });
 </script>

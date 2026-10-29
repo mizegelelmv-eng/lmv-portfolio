@@ -1,0 +1,16 @@
+---
+/**
+ * ScrollReveal — Animation d'apparition au scroll + shimmer doré
+ * Le système est initialisé par ScrollRevealInitializer.astro
+ */
+interface Props {
+  threshold?: number;
+  triggerOnce?: boolean;
+}
+
+const { threshold = 0.12, triggerOnce = true } = Astro.props;
+---
+
+<div class="scroll-reveal-wrapper" data-scroll-reveal data-threshold={threshold} data-trigger-once={triggerOnce}>
+  <slot />
+</div>

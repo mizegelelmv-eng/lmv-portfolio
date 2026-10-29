@@ -5,6 +5,7 @@ import GlassCard from './GlassCard.astro';
 import MockupEcommerce from './MockupEcommerce.astro';
 import MockupDashboard from './MockupDashboard.astro';
 import MockupLanding from './MockupLanding.astro';
+import ScrollReveal from './ScrollReveal.astro';
 
 const MOCKUPS = {
   ecommerce: MockupEcommerce,
@@ -16,28 +17,37 @@ const MOCKUPS = {
 <SectionParticleReveal radius={350}>
   <section id="projets" class="section" aria-labelledby="projects-title">
     <div class="container">
-      <span class="section-eyebrow">Portfolio</span>
-      <h2 id="projects-title" class="section-title">Projets de Démonstration</h2>
-      <div class="gold-line"></div>
-      <p class="section-subtitle">Exploration technique et design sur des thématiques variées.</p>
+      <ScrollReveal threshold={0.15}>
+        <span class="section-eyebrow reveal">Portfolio</span>
+        <h2 id="projects-title" class="section-title reveal reveal-delay-1">Projets de Démonstration</h2>
+        <div class="gold-line reveal reveal-delay-2"></div>
+        <p class="section-subtitle reveal reveal-delay-2">Exploration technique et design sur des thématiques variées.</p>
+      </ScrollReveal>
 
       <div class="grid grid-3">
-        {PROJECTS.map(project => {
+        {PROJECTS.map((project, i) => {
           const Mockup = MOCKUPS[project.mockupType as keyof typeof MOCKUPS];
           return (
-            <GlassCard key={project.id}>
-              <article class="project-item" data-glass-target>
-                <div class="project-badge">Démonstration</div>
-                <div class="project-mockup">
-                  {Mockup && <Mockup />}
-                </div>
-                <h3 class="project-item-title">{project.title}</h3>
-                <p class="project-item-tagline">{project.tagline}</p>
-                <div class="project-tags">
-                  {project.tags.slice(0, 3).map(tag => <span>{tag}</span>)}
-                </div>
-              </article>
-            </GlassCard>
+            <ScrollReveal threshold={0.2}>
+              <GlassCard key={project.id}>
+                <article class="project-item reveal reveal-shimmer" data-glass-target style={`transition-delay: ${i * 100}ms`}>
+                  <div class="project-badge">Démonstration</div>
+                  <div class="project-mockup">
+                    {Mockup && <Mockup />}
+                  </div>
+                  <h3 class="project-item-title">{project.title}</h3>
+                  <p class="project-item-tagline">{project.tagline}</p>
+                  <div class="project-tags">
+                    {project.tags.slice(0, 3).map((tag, ti, arr) => (
+                      <>
+                        <span>{tag}</span>
+                        {ti < arr.length - 1 && <span class="tag-separator">·</span>}
+                      </>
+                    ))}
+                  </div>
+                </article>
+              </GlassCard>
+            </ScrollReveal>
           )
         })}
       </div>
@@ -91,11 +101,25 @@ const MOCKUPS = {
     gap: var(--space-2);
   }
 
+  .project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    align-items: center;
+  }
+
   .project-tags span {
-    font-size: 10px;
-    color: var(--color-text-dim);
-    background: var(--color-bg-alt);
-    padding: 2px 8px;
+    font-size: 12px;
+    color: var(--color-text-muted);
+    background: var(--color-bg-elevated);
+    padding: 3px 10px;
     border-radius: var(--radius-sm);
+    border: 1px solid var(--color-border);
+  }
+
+  .tag-separator {
+    font-size: 12px;
+    color: var(--color-text-dim);
+    padding: 0 2px;
   }
 </style>

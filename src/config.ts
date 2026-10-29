@@ -53,30 +53,27 @@ export const SOCIAL = /** @type {const} */ ({
 });
 
 /**
- * Compétences techniques
+ * Compétences techniques — maîtrise confirmée
  */
 export const SKILLS = /** @type {const} */ ({
   frontend: [
     'HTML5 / CSS3',
     'JavaScript / TypeScript',
     'Astro',
-    'React',
-    'Tailwind CSS',
-    'Animation CSS / GSAP',
-  ],
-  backend: [
-    'Node.js',
-    'Python',
-    'API REST',
-    'CMS headless (Strapi, Sanity)',
+    'Animation CSS',
   ],
   tools: [
     'Git / GitHub',
-    'npm / pnpm / bun',
-    'Vercel / Netlify / GitHub Pages',
-    'Figma / Adobe XD',
-    'SEO technique',
-    'Performance web (Lighthouse)',
+    'npm / pnpm',
+    'GitHub Pages',
+    'Figma',
+  ],
+  /** Technologies en cours d'apprentissage — pas encore maîtrisées */
+  learning: [
+    'React (bases)',
+    'Node.js (notions)',
+    'Tailwind CSS (découverte)',
+    'Python (débutant)',
   ],
 });
 
@@ -86,27 +83,27 @@ export const SKILLS = /** @type {const} */ ({
 export const SERVICES = /** @type {const} */ ([
   {
     icon: 'website',
-    title: 'Site vitrine',
+    title: 'Site vitrine responsive',
     description:
-      'Site professionnel présentant votre activité, vos services et votre expertise. Optimisé pour le référencement et la conversion.',
+      'Site professionnel moderne, adapté à tous les écrans (mobile, tablette, desktop). Design soigné, chargement rapide et structure claire pour présenter votre activité.',
   },
   {
     icon: 'application',
-    title: 'Application web',
+    title: 'Application web simple',
     description:
-      'Application web interactive et performante : dashboard, SaaS, outil interne ou plateforme client.',
+      'Dashboard interactif ou outil interne léger. Interface intuitive avec fonctionnalités de base (tableaux, formulaires, navigation).',
   },
   {
     icon: 'redesign',
-    title: 'Refonte UI/UX',
+    title: 'Amélioration d\'interface',
     description:
-      'Modernisation de l\'interface existante pour améliorer l\'expérience utilisateur, la lisibilité et les taux de conversion.',
+      'Modernisation visuelle d\'un site existant : mise à jour du design, meilleure lisibilité et adaptation aux standards actuels.',
   },
   {
     icon: 'performance',
-    title: 'Optimisation performance',
+    title: 'Optimisation de base',
     description:
-      'Audit et amélioration des perfs (Core Web Vitals, accessibilité, temps de chargement) pour un site rapide et bien classé.',
+      'Amélioration des temps de chargement et de l\'accessibilité pour offrir une expérience fluide à tous les visiteurs.',
   },
 ]);
 
@@ -153,7 +150,7 @@ export const PROJECTS = /** @type {const} */ ([
     tagline: 'Site e-commerce responsive',
     badge: 'Projet de démonstration',
     description:
-      'Maquette d\'une boutique en ligne complète : catalogue produits, panier, checkout et espace client. Mise en avant du design responsive et des animations.',
+      'Maquette d\'une boutique en ligne : catalogue produits et panier. Mise en avant du design responsive et des animations CSS.',
     tags: ['Astro', 'CSS', 'JavaScript'],
     demoUrl: null,
     repoUrl: null,
@@ -165,8 +162,8 @@ export const PROJECTS = /** @type {const} */ ([
     tagline: 'Dashboard administrateur SaaS',
     badge: 'Projet de démonstration',
     description:
-      'Interface d\'administration avec graphiques, tableaux de données et navigation latérale. Démonstration de la gestion d\'états complexes en CSS pur.',
-    tags: ['HTML/CSS', 'JavaScript', 'Chart.js'],
+      'Interface d\'administration avec tableaux de données et navigation. Démonstration de la mise en page en CSS pur.',
+    tags: ['HTML/CSS', 'JavaScript'],
     demoUrl: null,
     repoUrl: null,
     mockupType: 'dashboard',

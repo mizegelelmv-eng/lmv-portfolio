@@ -1,0 +1,87 @@
+---
+/**
+ * ScrollRevealInitializer — Initialise le système de révélation au scroll partagé.
+ * Doit être placé dans <head> pour s'exécuter avant les premiers scripts client.
+ */
+---
+<script>
+  (function() {
+    if (typeof document === 'undefined') return;
+
+    // Déplacer ce script dans le head pour l'exécution synchrone
+    const script = document.currentScript;
+    if (!script) return;
+
+    const head = document.head || document.documentElement;
+    script.remove();
+    head.insertBefore(script.cloneNode(true), head.firstChild);
+
+    // Ne pas exécuter de logique ici — le vrai initialiseur est inline dans <head>
+  })();
+</script>
+<script>
+  (function() {
+    if (typeof window === 'undefined') return;
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Tableau partagé des observateurs pour tous les wrappers
+    const observers = new Map();
+
+    function reveal(el, observer, threshold, triggerOnce) {
+      if (!el || el.classList.contains('visible')) return;
+      el.classList.add('visible');
+      if (!prefersReducedMotion && el.classList.contains('reveal-shimmer')) {
+        el.classList.remove('shimmer-active');
+        void el.offsetWidth;
+        el.classList.add('shimmer-active');
+      }
+      if (triggerOnce) observer.unobserve(el);
+    }
+
+    function initWrapper(wrapper) {
+      if (wrapper.hasAttribute('data-scroll-initialized')) return;
+      wrapper.setAttribute('data-scroll-initialized', '');
+
+      const threshold = parseFloat(wrapper.getAttribute('data-threshold')) || 0.12;
+      const triggerOnce = wrapper.getAttribute('data-trigger-once') !== 'false';
+      const reveals = Array.from(wrapper.querySelectorAll(':scope > .reveal'));
+      if (!reveals.length) return;
+
+      const observer = new IntersectionObserver(
+        entries => {
+          entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            reveal(entry.target, observer, threshold, triggerOnce);
+          });
+        },
+        { threshold }
+      );
+
+      observers.set(wrapper, observer);
+      reveals.forEach(el => observer.observe(el));
+    }
+
+    // Activer l'état animé après un court délai pour le rendu initial
+    setTimeout(() => {
+      document.documentElement.classList.add('js-ready');
+    }, 50);
+
+    // Initialiser les wrappers existants
+    document.querySelectorAll('[data-scroll-reveal]').forEach(initWrapper);
+
+    // Observer les nouveaux wrappers ajoutés au DOM
+    const domObserver = new MutationObserver(mutations => {
+      mutations.forEach(m => {
+        m.addedNodes.forEach(node => {
+          if (node.nodeType !== 1) return;
+          if (node.hasAttribute && node.hasAttribute('data-scroll-reveal')) {
+            initWrapper(node);
+          }
+          node.querySelectorAll?.('[data-scroll-reveal]').forEach(initWrapper);
+        });
+      });
+    });
+    domObserver.observe(document.body, { childList: true, subtree: true });
+  })();
+</script>

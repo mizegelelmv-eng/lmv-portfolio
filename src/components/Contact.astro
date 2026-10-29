@@ -1,25 +1,32 @@
 ---
 import { PERSONAL, SOCIAL } from '../config';
 import SectionParticleReveal from './SectionParticleReveal.astro';
+import ScrollReveal from './ScrollReveal.astro';
 ---
 
 <SectionParticleReveal radius={300}>
   <section id="contact" class="section section-alt" aria-labelledby="contact-title">
     <div class="container">
-      <span class="section-eyebrow">Contact</span>
-      <h2 id="contact-title" class="section-title">Discutons de votre projet</h2>
-      <div class="gold-line"></div>
+      <ScrollReveal threshold={0.15}>
+        <span class="section-eyebrow reveal">Contact</span>
+        <h2 id="contact-title" class="section-title reveal reveal-delay-1">Discutons de votre projet</h2>
+        <div class="gold-line reveal reveal-delay-2"></div>
+      </ScrollReveal>
 
       <div class="grid grid-2">
         <div class="contact-info">
-          <p class="section-subtitle">Je suis disponible pour de nouveaux défis. Contactez-moi pour un échange.</p>
-          <a href={`mailto:${PERSONAL.email}`} class="contact-link">{PERSONAL.email}</a>
-          <a href={`https://wa.me/${PERSONAL.whatsapp}`} class="contact-link">WhatsApp</a>
+          <ScrollReveal threshold={0.2}>
+            <p class="section-subtitle reveal reveal-shimmer">Je suis disponible pour de nouveaux défis. Contactez-moi pour un échange.</p>
+            <a href={`mailto:${PERSONAL.email}`} class="contact-link reveal reveal-delay-1">{PERSONAL.email}</a>
+            <a href={`https://wa.me/${PERSONAL.whatsapp}`} class="contact-link reveal reveal-delay-2">WhatsApp</a>
+          </ScrollReveal>
         </div>
 
-        <div class="glass-card contact-form-placeholder">
-          <p>Un formulaire de contact sécurisé sera bientôt disponible ici.</p>
-        </div>
+        <ScrollReveal threshold={0.2}>
+          <div class="glass-card contact-form-placeholder reveal reveal-shimmer reveal-delay-2">
+            <p>Un formulaire de contact sécurisé sera bientôt disponible ici.</p>
+          </div>
+        </ScrollReveal>
       </div>
     </div>
   </section>
