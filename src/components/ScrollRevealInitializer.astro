@@ -45,7 +45,7 @@
 
       const threshold = parseFloat(wrapper.getAttribute('data-threshold')) || 0.12;
       const triggerOnce = wrapper.getAttribute('data-trigger-once') !== 'false';
-      const reveals = Array.from(wrapper.querySelectorAll(':scope > .reveal'));
+      const reveals = Array.from(wrapper.querySelectorAll('.reveal'));
       if (!reveals.length) return;
 
       const observer = new IntersectionObserver(
